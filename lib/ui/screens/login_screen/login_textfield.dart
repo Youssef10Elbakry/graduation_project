@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class LoginTextfield extends StatelessWidget {
   String hintText;
-  LoginTextfield({super.key, required this.hintText});
+  TextEditingController controller;
+  LoginTextfield({super.key, required this.hintText, required this.controller});
+
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +13,12 @@ class LoginTextfield extends StatelessWidget {
       height: MediaQuery.of(context).size.height*0.07,
       width: MediaQuery.of(context).size.width*0.85,
       child: TextFormField(
-        maxLines: 2,
+        obscureText: hintText == "  Password"? true: false,
+        controller: controller,
+        maxLines: 1,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*0.021,
+              horizontal: MediaQuery.of(context).size.width*0.033),
           fillColor: const Color(0xffF1F4FF),
           filled: true,
           enabledBorder: OutlineInputBorder(borderSide: const BorderSide(width: 2, color: Color(0xffF1F4FF)),

@@ -5,8 +5,9 @@ import 'package:graduation_project/ui/widgets/welcome_and_login_button.dart';
 
 class LoginScreen extends StatelessWidget {
   static String screenName = "Login Screen";
-  const LoginScreen({super.key});
-
+ static TextEditingController emailController = TextEditingController();
+ static TextEditingController passController = TextEditingController();
+  LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,10 +24,10 @@ class LoginScreen extends StatelessWidget {
             style: TextStyle(fontSize: 22, fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600, color: Color(0xff000000)),),
           const Spacer(flex: 8,),
-          LoginTextfield(hintText: "  Email"),
+          LoginTextfield(hintText: "  Email", controller: emailController,),
           const Spacer(flex: 3,),
-          LoginTextfield(hintText: "  Password"),
-          Spacer(flex: 2,),
+          LoginTextfield(hintText: "  Password", controller: passController,),
+          const Spacer(flex: 2,),
           Row(
             children: [
               const Spacer(flex: 9,),
@@ -37,9 +38,9 @@ class LoginScreen extends StatelessWidget {
               const Spacer(flex: 1,)
             ],
           ),
-          Spacer(flex:  2,),
-          WelcomeAndLoginButton(buttonText: "Sign in",),
-          Spacer(flex: 30,)
+          const Spacer(flex:  2,),
+          WelcomeAndLoginButton(buttonText: "Sign in"),
+          const Spacer(flex: 30,)
         ],
       ),
     );
