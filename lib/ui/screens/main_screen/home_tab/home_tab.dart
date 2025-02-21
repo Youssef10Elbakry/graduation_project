@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/ui/screens/main_screen/home_tab/home_insights_container.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -45,7 +46,45 @@ class HomeTab extends StatelessWidget {
               fontSize: 25
             ),),
           ],
-        )
+        ),
+        SizedBox(height: 25,),
+        Row(
+          children: [
+            Spacer(),
+            CircleAvatar(
+              backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
+              radius: 36,
+            ),
+            Spacer(),
+            CircleAvatar(
+              backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
+              radius: 36,
+            ),
+            Spacer(),
+            CircleAvatar(
+              backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
+              radius: 36,
+            ),
+            Spacer()
+          ],
+
+        ),
+        SizedBox(height: 50),
+        Row(
+          children: [
+            SizedBox(width: screenWidth*0.089,),
+            Text("Insights", style: TextStyle(
+                color: Colors.black,
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.w600,
+                fontSize: 20
+            ),),
+          ],
+        ),
+        SizedBox(height: 35,),
+        Center(child: HomeInsightsContainer(title: "Attendance", num: 80,)),
+        SizedBox(height: 15,),
+        Center(child: HomeInsightsContainer(title: "Expediences", num: 3000,))
       ],
     );
   }
