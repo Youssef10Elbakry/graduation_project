@@ -33,9 +33,9 @@ class HomeTab extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(height: 40,),
+        SizedBox(height: 0.042,),
         Center(child: Image.asset("assets/images/football_courts.png")),
-        SizedBox(height: 25,),
+        SizedBox(height: screenHeight*0.02626,),
         Row(
           children: [
             SizedBox(width: screenWidth*0.089,),
@@ -47,7 +47,7 @@ class HomeTab extends StatelessWidget {
             ),),
           ],
         ),
-        SizedBox(height: 25,),
+        SizedBox(height: screenHeight*0.02626,),
         Row(
           children: [
             Spacer(),
@@ -69,7 +69,7 @@ class HomeTab extends StatelessWidget {
           ],
 
         ),
-        SizedBox(height: 50),
+        SizedBox(height: screenHeight*0.05252),
         Row(
           children: [
             SizedBox(width: screenWidth*0.089,),
@@ -81,9 +81,9 @@ class HomeTab extends StatelessWidget {
             ),),
           ],
         ),
-        SizedBox(height: 35,),
+        SizedBox(height: screenHeight*0.03676,),
         Center(child: HomeInsightsContainer(title: "Attendance", num: 80,)),
-        SizedBox(height: 15,),
+        SizedBox(height: screenHeight*0.015756,),
         Center(child: HomeInsightsContainer(title: "Expediences", num: 3000,))
       ],
     );

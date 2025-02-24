@@ -43,6 +43,7 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   syncfusion_flutter_charts: ^28.2.6
   fl_chart: ^0.70.2
+  intl: ^0.20.2
 
 
 
@@ -83,6 +84,9 @@ flutter:
         - asset: assets/fonts/Poppins-Thin.ttf
         - asset: assets/fonts/Poppins-Regular.ttf
     - family: Prompt
+      fonts:
+        - asset: assets/fonts/Prompt-Regular.ttf
+    - family: Montserrat
       fonts:
         - asset: assets/fonts/Prompt-Regular.ttf
 

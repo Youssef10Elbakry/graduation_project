@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/ui/screens/main_screen/home_tab/home_tab.dart';
 import 'package:graduation_project/ui/screens/main_screen/profile_tab/profile_tab.dart';
+import 'package:graduation_project/ui/screens/main_screen/wallet_tab/wallet_tab.dart';
 
 class MainScreen extends StatefulWidget {
   static String screenName = "Main Screen";
@@ -12,8 +13,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  List<Widget> tabs = [ProfileTab(), const HomeTab()];
-  int currIndex = 1;
+  List<Widget> tabs = [ProfileTab(), const HomeTab(), const WalletTab()];
+  int currIndex = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
