@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:graduation_project/ui/screens/main_screen/home_tab/child_avatar.dart';
 import 'package:graduation_project/ui/screens/main_screen/home_tab/home_insights_container.dart';
 
 class HomeTab extends StatelessWidget {
@@ -9,6 +11,7 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -33,7 +36,7 @@ class HomeTab extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(height: 0.042,),
+        SizedBox(height: screenHeight*0.042,),
         Center(child: Image.asset("assets/images/football_courts.png")),
         SizedBox(height: screenHeight*0.02626,),
         Row(
@@ -48,27 +51,42 @@ class HomeTab extends StatelessWidget {
           ],
         ),
         SizedBox(height: screenHeight*0.02626,),
-        Row(
-          children: [
-            Spacer(),
-            CircleAvatar(
-              backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
-              radius: 36,
-            ),
-            Spacer(),
-            CircleAvatar(
-              backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
-              radius: 36,
-            ),
-            Spacer(),
-            CircleAvatar(
-              backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
-              radius: 36,
-            ),
-            Spacer()
-          ],
-
+        Expanded(
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 2,
+                  scrollDirection: Axis.horizontal,
+                    itemBuilder: (_, index)=>const ChildAvatar()),
+              ),
+            ],
+          ),
         ),
+        // Row(
+        //   children: [
+        //     Spacer(),
+        //     CircleAvatar(
+        //       backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
+        //       radius: 36,
+        //     ),
+        //     Spacer(),
+        //     CircleAvatar(
+        //       backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
+        //       radius: 36,
+        //     ),
+        //     Spacer(),
+        //     CircleAvatar(
+        //       backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
+        //       radius: 36,
+        //     ),
+        //     Spacer()
+        //   ],
+        //
+        // ),
         SizedBox(height: screenHeight*0.05252),
         Row(
           children: [
