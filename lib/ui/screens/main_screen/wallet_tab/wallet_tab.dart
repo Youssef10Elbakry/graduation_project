@@ -33,7 +33,13 @@ class _WalletTabState extends State<WalletTab> {
 
         ),
         SizedBox(height: height*0.04727),
-        VisaContainer(),
+        Row(
+          children: [
+            Spacer(),
+            VisaContainer(balance: 500,),
+            Spacer()
+          ],
+        ),
         SizedBox(height: height*0.021,),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 0, horizontal: width*0.049),

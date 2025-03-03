@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.screenName: (_)=>LoginScreen(),
         MainScreen.screenName: (_)=>const MainScreen()
       },
-      initialRoute: MainScreen.screenName,
+      initialRoute: SplashScreen.screenName,
     );
   }
 }

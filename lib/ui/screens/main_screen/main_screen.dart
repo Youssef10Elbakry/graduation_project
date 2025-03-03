@@ -13,7 +13,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  List<Widget> tabs = [ProfileTab(), const HomeTab(), const WalletTab()];
+  List<Widget> tabs = [ProfileTab(), HomeTab(), const WalletTab()];
   int currIndex = 2;
   @override
   Widget build(BuildContext context) {
