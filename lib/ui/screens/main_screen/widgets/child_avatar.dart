@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/models/home_tab_child_model.dart';
+import 'package:graduation_project/models/child_model.dart';
 import 'package:graduation_project/ui/providers/home_tab_provider.dart';
+import 'package:graduation_project/ui/providers/wallet_tab_provider.dart';
 import 'package:provider/provider.dart';
 
 class ChildAvatar extends StatefulWidget {
-  ChildAvatar({super.key, required this.childModel});
-  HomeTabChildModel childModel;
+  ChildAvatar({super.key, required this.childModel, required this.inHomeTab});
+  ChildModel childModel ;
+  bool inHomeTab;
 
   @override
   State<ChildAvatar> createState() => _ChildAvatarState();
@@ -14,6 +16,7 @@ class ChildAvatar extends StatefulWidget {
 
 class _ChildAvatarState extends State<ChildAvatar> {
   late HomeTabProvider homeTabProvider;
+  late WalletTabProvider walletTabProvider;
   @override
   Widget build(BuildContext context) {
     homeTabProvider = Provider.of(context);
@@ -22,7 +25,13 @@ class _ChildAvatarState extends State<ChildAvatar> {
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0),
       child: InkWell(
         onTap: (){
-          homeTabProvider.onChildTapped(widget.childModel.id);
+          if(widget.inHomeTab){
+            homeTabProvider.onChildTapped(widget.childModel.id);
+          }
+          else{
+            walletTabProvider.onChildTapped(widget.childModel.id);
+          }
+
         },
         child: CircleAvatar(
           backgroundImage: NetworkImage(widget.childModel.profilePictureLink),

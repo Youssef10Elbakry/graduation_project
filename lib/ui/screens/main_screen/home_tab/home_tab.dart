@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graduation_project/ui/providers/home_tab_provider.dart';
-import 'package:graduation_project/ui/screens/main_screen/home_tab/child_avatar.dart';
+import 'package:graduation_project/ui/screens/main_screen/widgets/child_avatar.dart';
 import 'package:graduation_project/ui/screens/main_screen/home_tab/home_insights_container.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +37,7 @@ class _HomeTabState extends State<HomeTab> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 20,),
         Row(
@@ -91,7 +91,7 @@ class _HomeTabState extends State<HomeTab> {
               child: Row(
                 // mainAxisSize: MainAxisSize.max,
                 children: List.generate(provider.children.length, (index) { // Change 5 to any number
-                  return ChildAvatar(childModel: provider.children[index],);
+                  return ChildAvatar(childModel: provider.children[index], inHomeTab: true,);
                   })
                       ),
             ),

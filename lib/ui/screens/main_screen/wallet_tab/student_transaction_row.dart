@@ -30,7 +30,7 @@ class _StudentTransactionRowState extends State<StudentTransactionRow> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.recentTransaction.name, style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w400, fontSize: 14),),
+              Text(widget.recentTransaction.studentName, style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w400, fontSize: 14),),
               Opacity(
                 opacity: 0.4,
                   child: Text(formattedDate.toString(), style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w400, fontSize: 12),)

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:graduation_project/models/home_tab_child_model.dart';
+import 'package:graduation_project/models/child_model.dart';
 import 'package:http/http.dart' as http;
 
 class HomeTabProvider extends ChangeNotifier{
@@ -13,10 +13,11 @@ int expendiences = 0;
 double presentPercentage = 0;
 double absentPercentage = 0;
 double latePercentage = 0;
-List<HomeTabChildModel> children = [];
+List<ChildModel> children = [];
 final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
 Future<void> getChildren() async {
+  children = [];
   isLoadingChildren = true;
   notifyListeners();
   try{
@@ -33,7 +34,7 @@ Future<void> getChildren() async {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       for(int i = 0; i<data['childs'].length;i++){
-        children.add(HomeTabChildModel.fromJson(data['childs'][i]));
+        children.add(ChildModel.fromJson(data['childs'][i]));
         print(children[i].username);
       }
       print("children: $children");
