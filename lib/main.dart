@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:graduation_project/ui/providers/home_tab_provider.dart';
 import 'package:graduation_project/ui/providers/sign_in_button_provider.dart';
 import 'package:graduation_project/ui/providers/user_profile_provider.dart';
+import 'package:graduation_project/ui/providers/wallet_tab_provider.dart';
 import 'package:graduation_project/ui/screens/login_screen/login_screen.dart';
 import 'package:graduation_project/ui/screens/main_screen/main_screen.dart';
 import 'package:graduation_project/ui/screens/splash_screen.dart';
@@ -14,7 +16,9 @@ void main() {
   runApp(
       MultiProvider(providers: [
         ChangeNotifierProvider(create: (_)=>SignInButtonProvider()),
-        ChangeNotifierProvider(create: (_)=> UserProfileProvider())
+        ChangeNotifierProvider(create: (_)=> UserProfileProvider()),
+        ChangeNotifierProvider(create: (_)=> HomeTabProvider()),
+        ChangeNotifierProvider(create: (_)=> WalletTabProvider())
       ],
         child: const MyApp(),
       )
@@ -35,7 +39,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.screenName: (_)=>LoginScreen(),
         MainScreen.screenName: (_)=>const MainScreen()
       },
-      initialRoute: MainScreen.screenName,
+      initialRoute: SplashScreen.screenName,
     );
   }
 }

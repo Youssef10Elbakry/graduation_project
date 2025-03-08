@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graduation_project/models/recent_transaction_model.dart';
+import 'package:graduation_project/ui/providers/wallet_tab_provider.dart';
 import 'package:graduation_project/ui/screens/main_screen/wallet_tab/student_transaction_row.dart';
 import 'package:graduation_project/ui/screens/main_screen/wallet_tab/visa_container.dart';
+import 'package:provider/provider.dart';
+
+import '../widgets/child_avatar.dart';
 
 class WalletTab extends StatefulWidget {
   const WalletTab({super.key});
@@ -12,10 +17,23 @@ class WalletTab extends StatefulWidget {
 }
 
 class _WalletTabState extends State<WalletTab> {
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
+  void initState() {
+    super.initState();
+
+    
+    Future.microtask(() async {
+      final String token = (await secureStorage.read(key: "authentication_key"))!;
+      Provider.of<WalletTabProvider>(context, listen: false).getChildren();
+      Provider.of<WalletTabProvider>(context, listen: false).getRecentTransactions();
+      print("Token: $token");
+    });
+  }
+late WalletTabProvider provider;
   @override
   Widget build(BuildContext context) {
-    List recentTransactions = [RecentTransaction(avatarPath: 'assets/images/deif_circle_avatar.png', name: 'Deif Ahmed', date: DateTime(2025, 2, 24), amount: 50),
-      RecentTransaction(avatarPath: 'assets/images/deif_circle_avatar.png', name: 'Deif Ahmed', date: DateTime(2025, 2, 24), amount: 50)];
+    provider = Provider.of(context);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Column(
@@ -33,7 +51,13 @@ class _WalletTabState extends State<WalletTab> {
 
         ),
         SizedBox(height: height*0.04727),
-        VisaContainer(),
+        Row(
+          children: [
+            Spacer(),
+            VisaContainer(balance: 500,),
+            Spacer()
+          ],
+        ),
         SizedBox(height: height*0.021,),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 0, horizontal: width*0.049),
@@ -71,27 +95,27 @@ class _WalletTabState extends State<WalletTab> {
           ),
         ),
         SizedBox(height: height*0.02626,),
-        Row(
+        provider.isLoadingChildren?const Row(
           children: [
             Spacer(),
-            CircleAvatar(
-              backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
-              radius: 36,
-            ),
-            Spacer(),
-            CircleAvatar(
-              backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
-              radius: 36,
-            ),
-            Spacer(),
-            CircleAvatar(
-              backgroundImage: AssetImage("assets/images/deif_circle_avatar.png"),
-              radius: 36,
-            ),
+            CircularProgressIndicator(),
             Spacer()
           ],
-
-        ),
+        ):
+        SizedBox(
+            height: height*0.084,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: EdgeInsets.only(left: width*0.089),
+                child: Row(
+                  // mainAxisSize: MainAxisSize.max,
+                    children: List.generate(provider.children.length, (index) {
+                      return ChildAvatar(childModel: provider.children[index], inHomeTab: false,);
+                    })
+                ),
+              ),
+            )),
         SizedBox(height: height*0.042,),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 0, horizontal: width*0.049),
@@ -109,7 +133,11 @@ class _WalletTabState extends State<WalletTab> {
 
         ),
         SizedBox(height: height*0.0084,),
-        Expanded(child: ListView.builder( itemCount:recentTransactions.length, itemBuilder: (_, index)=>StudentTransactionRow(recentTransaction: recentTransactions[index])))
+        provider.isLoadingRecentTransactions?
+            Row(children: [
+              Spacer(), CircularProgressIndicator(), Spacer()
+            ],):
+        Expanded(child: ListView.builder( itemCount:provider.recentTransactions.length, itemBuilder: (_, index)=>StudentTransactionRow(recentTransaction: provider.recentTransactions[index])))
       ],
     );
   }
