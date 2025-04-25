@@ -12,6 +12,9 @@ import 'package:graduation_project/ui/screens/splash_screen.dart';
 import 'package:graduation_project/ui/screens/student_profile_screen/student_profile_screen.dart';
 import 'package:graduation_project/ui/screens/welcome_screen/welcome_screen.dart';
 import 'package:provider/provider.dart';
+import 'ui/providers/passcode_provider.dart';
+import 'ui/providers/comfirmation_provider.dart' ;
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +24,15 @@ void main() {
         ChangeNotifierProvider(create: (_)=>SignInButtonProvider()),
         ChangeNotifierProvider(create: (_)=> UserProfileProvider()),
         ChangeNotifierProvider(create: (_)=> HomeTabProvider()),
+
         ChangeNotifierProvider(create: (_)=> WalletTabProvider(),),
         ChangeNotifierProvider(create: (_)=>StudentProfileTabBarProvider())
+
+       
+        ChangeNotifierProvider(create: (_) => PasscodeProvider()),
+        ChangeNotifierProvider(create: (_) => ConfirmationProvider()),
+
+
       ],
         child: const MyApp(),
       )
@@ -42,8 +52,17 @@ class MyApp extends StatelessWidget {
         WelcomeScreen.screenName: (_)=>const WelcomeScreen(),
         LoginScreen.screenName: (_)=>LoginScreen(),
         MainScreen.screenName: (_)=>const MainScreen(),
+
         SettingsScreen.screenName: (_)=> const SettingsScreen(),
         StudentProfileScreen.screenName: (_)=> StudentProfileScreen()
+
+        PaymentSuccessfulScreen.routeName: (_) => const PaymentSuccessfulScreen(),
+        ErrorScreen.routeName: (_) => const ErrorScreen(),
+        ConfirmationScreen.routeName: (_) => const ConfirmationScreen(),
+        PasscodeScreen.routeName: (_) => const PasscodeScreen(),
+    
+    
+
       },
       initialRoute: StudentProfileScreen.screenName,
     );
