@@ -1,0 +1,23 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class StudentProfileBalanceContainer extends StatelessWidget {
+  const StudentProfileBalanceContainer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 150,
+      height: 120,
+      decoration: BoxDecoration(color: const Color(0xff6156C8), borderRadius: BorderRadius.circular(16)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Balance", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16),),
+          SizedBox(height: 7,),
+          Text("EGP 500", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 24),),
+        ],
+      ),
+    );
+  }
+}
