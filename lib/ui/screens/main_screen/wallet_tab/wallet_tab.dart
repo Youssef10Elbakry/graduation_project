@@ -134,7 +134,7 @@ late WalletTabProvider provider;
         ),
         SizedBox(height: height*0.0084,),
         provider.isLoadingRecentTransactions?
-            Row(children: [
+            const Row(children: [
               Spacer(), CircularProgressIndicator(), Spacer()
             ],):
         Expanded(child: ListView.builder( itemCount:provider.recentTransactions.length, itemBuilder: (_, index)=>StudentTransactionRow(recentTransaction: provider.recentTransactions[index])))
