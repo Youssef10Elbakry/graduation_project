@@ -14,6 +14,11 @@ import 'package:graduation_project/ui/screens/welcome_screen/welcome_screen.dart
 import 'package:provider/provider.dart';
 import 'ui/providers/passcode_provider.dart';
 import 'ui/providers/comfirmation_provider.dart' ;
+import 'package:graduation_project/ui/screens/forgot_password_screens/forgot_password_screen.dart';
+import 'package:graduation_project/ui/screens/forgot_password_screens/verification_screen.dart';
+import 'package:graduation_project/ui/screens/forgot_password_screens/new_password_screen.dart';
+import 'package:graduation_project/ui/screens/forgot_password_screens/successful_screen.dart';
+
 
 
 void main() {
@@ -60,8 +65,14 @@ class MyApp extends StatelessWidget {
         ErrorScreen.routeName: (_) => const ErrorScreen(),
         ConfirmationScreen.routeName: (_) => const ConfirmationScreen(),
         PasscodeScreen.routeName: (_) => const PasscodeScreen(),
-    
-    
+
+        ForgotPasswordScreen.screenName: (_) => const ForgotPasswordScreen(),
+        VerificationScreen.screenName: (_) => const VerificationScreen(),
+        NewPasswordScreen.screenName: (_) => const NewPasswordScreen(),
+        SuccessfulScreen.screenName: (_) => const SuccessfulScreen(),
+
+
+
 
       },
       initialRoute: StudentProfileScreen.screenName,
