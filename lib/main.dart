@@ -13,70 +13,63 @@ import 'package:graduation_project/ui/screens/student_profile_screen/student_pro
 import 'package:graduation_project/ui/screens/welcome_screen/welcome_screen.dart';
 import 'package:provider/provider.dart';
 import 'ui/providers/passcode_provider.dart';
-import 'ui/providers/comfirmation_provider.dart' ;
+import 'ui/providers/comfirmation_provider.dart';
 import 'package:graduation_project/ui/screens/forgot_password_screens/forgot_password_screen.dart';
 import 'package:graduation_project/ui/screens/forgot_password_screens/verification_screen.dart';
 import 'package:graduation_project/ui/screens/forgot_password_screens/new_password_screen.dart';
 import 'package:graduation_project/ui/screens/forgot_password_screens/successful_screen.dart';
 
 
+import 'package:graduation_project/ui/screens/amount_screens/amount_selection_sheet.dart';
+import 'package:graduation_project/ui/screens/amount_screens/number_pad_sheet.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(
-      MultiProvider(providers: [
-        ChangeNotifierProvider(create: (_)=>SignInButtonProvider()),
-        ChangeNotifierProvider(create: (_)=> UserProfileProvider()),
-        ChangeNotifierProvider(create: (_)=> HomeTabProvider()),
-
-        ChangeNotifierProvider(create: (_)=> WalletTabProvider(),),
-        ChangeNotifierProvider(create: (_)=>StudentProfileTabBarProvider())
-
-       
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SignInButtonProvider()),
+        ChangeNotifierProvider(create: (_) => UserProfileProvider()),
+        ChangeNotifierProvider(create: (_) => HomeTabProvider()),
+        ChangeNotifierProvider(create: (_) => WalletTabProvider()),
+        ChangeNotifierProvider(create: (_) => StudentProfileTabBarProvider()),
         ChangeNotifierProvider(create: (_) => PasscodeProvider()),
         ChangeNotifierProvider(create: (_) => ConfirmationProvider()),
-
-
       ],
-        child: const MyApp(),
-      )
+      child: const MyApp(),
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        SplashScreen.screenName: (_)=> SplashScreen(),
-        WelcomeScreen.screenName: (_)=>const WelcomeScreen(),
-        LoginScreen.screenName: (_)=>LoginScreen(),
-        MainScreen.screenName: (_)=>const MainScreen(),
-
-        SettingsScreen.screenName: (_)=> const SettingsScreen(),
-        StudentProfileScreen.screenName: (_)=> StudentProfileScreen()
-
+        SplashScreen.screenName: (_) => SplashScreen(),
+        WelcomeScreen.screenName: (_) => const WelcomeScreen(),
+        LoginScreen.screenName: (_) => LoginScreen(),
+        MainScreen.screenName: (_) => const MainScreen(),
+        SettingsScreen.screenName: (_) => const SettingsScreen(),
+        StudentProfileScreen.screenName: (_) => StudentProfileScreen(),
         PaymentSuccessfulScreen.routeName: (_) => const PaymentSuccessfulScreen(),
         ErrorScreen.routeName: (_) => const ErrorScreen(),
         ConfirmationScreen.routeName: (_) => const ConfirmationScreen(),
         PasscodeScreen.routeName: (_) => const PasscodeScreen(),
-
         ForgotPasswordScreen.screenName: (_) => const ForgotPasswordScreen(),
         VerificationScreen.screenName: (_) => const VerificationScreen(),
         NewPasswordScreen.screenName: (_) => const NewPasswordScreen(),
         SuccessfulScreen.screenName: (_) => const SuccessfulScreen(),
 
 
-
-
+        AmountSelectionSheet.routeName: (_) => const AmountSelectionSheet(),
+        NumberPadSheet.routeName: (_) => const NumberPadSheet(),
       },
       initialRoute: StudentProfileScreen.screenName,
     );
   }
 }
-
