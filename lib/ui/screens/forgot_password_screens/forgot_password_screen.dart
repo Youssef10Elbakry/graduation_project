@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_icon_button.dart';
-import '../widgets/custom_text.dart';
-import '../widgets/custom_text_field.dart';
+import 'package:graduation_project/ui/widgets/custom_button.dart';
+import 'package:graduation_project/ui/widgets/custom_icon_button.dart';
+import 'package:graduation_project/ui/widgets/custom_text.dart';
+import 'package:graduation_project/ui/widgets/custom_text_field.dart';
+
+
 import 'verification_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {

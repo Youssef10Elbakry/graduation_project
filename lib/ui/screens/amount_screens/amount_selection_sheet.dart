@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'number_pad_sheet.dart';
 
 class AmountSelectionSheet extends StatefulWidget {
+  static const String routeName = 'amount_selection_sheet'; // ✅ Correct location
+
   const AmountSelectionSheet({super.key});
 
   @override
@@ -9,7 +11,6 @@ class AmountSelectionSheet extends StatefulWidget {
 }
 
 class _AmountSelectionSheetState extends State<AmountSelectionSheet> {
-  static const String routeName = 'amount_selection_sheet';
   String amount = "0";
 
   void _showNumberPadSheet(BuildContext context) {
@@ -23,6 +24,7 @@ class _AmountSelectionSheetState extends State<AmountSelectionSheet> {
             amount = selectedAmount;
           });
         },
+        studentId: '',
       ),
     );
   }
@@ -38,19 +40,19 @@ class _AmountSelectionSheetState extends State<AmountSelectionSheet> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-        const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Youssuf Mahmoud',
-            style: TextStyle(color: Colors.white, fontSize: 22),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Youssuf Mahmoud',
+                style: TextStyle(color: Colors.white, fontSize: 22),
+              ),
+              CircleAvatar(
+                backgroundImage: AssetImage('assets/youssuf_mahmoud.png'),
+                radius: 35,
+              ),
+            ],
           ),
-          CircleAvatar(
-            backgroundImage: AssetImage('assets/youssuf_mahmoud.png'),
-            radius: 35,
-          ),
-        ],
-      ),
           const SizedBox(height: 20),
           GestureDetector(
             onTap: () => _showNumberPadSheet(context),

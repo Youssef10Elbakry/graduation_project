@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/custom_button.dart';
-import '../widgets/custom_icon_button.dart';
-import '../widgets/custom_text.dart';
+import 'package:graduation_project/ui/widgets/custom_button.dart';
+import 'package:graduation_project/ui/widgets/custom_icon_button.dart';
+import 'package:graduation_project/ui/widgets/custom_text.dart';
+
 class SuccessfulScreen extends StatelessWidget {
   static const String routeName = '/successful_screen';
   const SuccessfulScreen({super.key});
