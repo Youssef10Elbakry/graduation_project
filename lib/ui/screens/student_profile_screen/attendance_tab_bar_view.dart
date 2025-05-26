@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/ui/screens/attendence_screen/attendance_screen.dart';
 
 class AttendanceTabBarView extends StatefulWidget {
   const AttendanceTabBarView({super.key});
@@ -18,14 +19,19 @@ class _AttendanceTabBarViewState extends State<AttendanceTabBarView> {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
           child: Row(
             children: [
-              Text("Last Week", style: TextStyle(color: Color(0xff2F2F2F), fontWeight: FontWeight.w600, fontSize: 16),),
-              Spacer(),
-              Text("View All", style: TextStyle(color: Color(0xff3491DB), fontSize: 16, fontWeight: FontWeight.w500),)
+              const Text("Last Week", style: TextStyle(color: Color(0xff2F2F2F), fontWeight: FontWeight.w600, fontSize: 16),),
+              const Spacer(),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const AttendanceScreen(studentId: "1")));
+                },
+                child: const Text("View All", style: TextStyle(color: Color(0xff3491DB), fontSize: 16, fontWeight: FontWeight.w500)),
+              )
             ],
           ),
 
         ),
-        SizedBox(height: 20,),
+        const SizedBox(height: 20,),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: SizedBox(
@@ -34,7 +40,7 @@ class _AttendanceTabBarViewState extends State<AttendanceTabBarView> {
               columnSpacing: 20,
               headingRowHeight: 40,
               dataRowHeight: 50,
-              columns: [
+              columns: const [
                 DataColumn(label: Text('Status', style: TextStyle(fontWeight: FontWeight.bold))),
                 DataColumn(label: Text('Date', style: TextStyle(fontWeight: FontWeight.bold))),
                 DataColumn(label: Text('Login Time', style: TextStyle(fontWeight: FontWeight.bold))),
@@ -59,7 +65,7 @@ class _AttendanceTabBarViewState extends State<AttendanceTabBarView> {
       cells: [
         DataCell(
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(6),

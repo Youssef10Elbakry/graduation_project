@@ -5,6 +5,7 @@ import 'package:graduation_project/models/recent_transaction_model.dart';
 import 'package:graduation_project/ui/providers/wallet_tab_provider.dart';
 import 'package:graduation_project/ui/screens/main_screen/wallet_tab/student_transaction_row.dart';
 import 'package:graduation_project/ui/screens/main_screen/wallet_tab/visa_container.dart';
+import 'package:graduation_project/ui/screens/transactions_details/transactions_details.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/child_avatar.dart';
@@ -124,7 +125,9 @@ late WalletTabProvider provider;
               const Text("Recent Transactions", style: TextStyle(fontFamily: 'Poppins',fontSize: 16, fontWeight: FontWeight.w600),),
               const Spacer(),
               InkWell(
-                onTap: (){},
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>TransactionsDetailsScreen()));
+                },
                   child: const Text("View All", style: TextStyle(color: Color(0xff3491DB), fontFamily: 'Poppins', fontSize: 16, fontWeight: FontWeight.w500),)),
 
 

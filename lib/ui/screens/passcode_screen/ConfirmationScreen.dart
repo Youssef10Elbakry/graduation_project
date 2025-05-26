@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:passcode_screeen/ui/providers/comfirmation_provider.dart';
+import '/ui/providers/comfirmation_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:passcode_screeen/ui/widgets/keypad_confirmation.dart';
+import '/ui/widgets/keypad_confirmation.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 

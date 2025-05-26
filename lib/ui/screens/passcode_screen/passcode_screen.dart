@@ -4,19 +4,19 @@ import '../../providers/passcode_provider.dart';
 import '../../widgets/keypad.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class PasscodeScreen extends StatelessWidget {
   static const routeName = '/passcode';
   final String studentId;
   final double amount;
-  final String token;
+  final secureStorage = const FlutterSecureStorage();
 
   const PasscodeScreen({
-    Key? key,
+    super.key,
     required this.studentId,
     required this.amount,
-    required this.token,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -80,13 +80,14 @@ class PasscodeScreen extends StatelessWidget {
                     child: Keypad(
                       onDigitPressed: passcodeProvider.isLoading
                           ? null
-                          : (digit) {
+                          : (digit) async {
+                              final token = await secureStorage.read(key: "authentication_key");
                               passcodeProvider.addDigit(
                                 digit,
                                 context,
                                 studentId,
                                 amount,
-                                token,
+                                token ?? '',
                               );
                             },
                       onBackspacePressed: passcodeProvider.isLoading

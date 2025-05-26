@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'number_pad_sheet.dart';
 
 class AmountSelectionSheet extends StatefulWidget {
+  const AmountSelectionSheet({super.key});
+
   @override
   _AmountSelectionSheetState createState() => _AmountSelectionSheetState();
 }
@@ -28,15 +30,15 @@ class _AmountSelectionSheetState extends State<AmountSelectionSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(20),
+      decoration: const BoxDecoration(
         color: Color(0xFF001645),
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-        Row(
+        const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
@@ -49,19 +51,19 @@ class _AmountSelectionSheetState extends State<AmountSelectionSheet> {
           ),
         ],
       ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           GestureDetector(
             onTap: () => _showNumberPadSheet(context),
             child: Text(
               'EGP $amount',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
@@ -71,7 +73,7 @@ class _AmountSelectionSheetState extends State<AmountSelectionSheet> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: Text('Send'),
             ),
