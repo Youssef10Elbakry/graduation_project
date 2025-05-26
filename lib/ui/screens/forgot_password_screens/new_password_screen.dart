@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:forgot_password_screen/ui/screens/successful_screen.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_icon_button.dart';
-import '../widgets/custom_text.dart';
-import '../widgets/custom_text_field.dart';
+import 'package:graduation_project/ui/screens/forgot_password_screens/successful_screen.dart';
+
+import 'package:graduation_project/ui/widgets/custom_button.dart';
+import 'package:graduation_project/ui/widgets/custom_icon_button.dart';
+import 'package:graduation_project/ui/widgets/custom_text.dart';
+import 'package:graduation_project/ui/widgets/custom_text_field.dart';
+
+import '../login_screen/login_screen.dart';
+
 
 class SetNewPasswordScreen extends StatefulWidget {
   static const String routeName = '/new_password_screen';

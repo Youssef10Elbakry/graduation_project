@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 class NumberPadSheet extends StatefulWidget {
   static const String routeName = 'number_pad_sheet';
   final Function(String) onAmountSelected;
+  final String studentId;
 
-  NumberPadSheet({required this.onAmountSelected});
+  NumberPadSheet({
+    required this.onAmountSelected,
+    required this.studentId,
+  });
 
   @override
   _NumberPadSheetState createState() => _NumberPadSheetState();
@@ -12,9 +16,12 @@ class NumberPadSheet extends StatefulWidget {
 
 class _NumberPadSheetState extends State<NumberPadSheet> {
   String amount = "0";
+  String? errorMessage;
 
   void _onKeyPress(String value) {
     setState(() {
+      errorMessage = null; // Reset error when typing
+
       if (value == "←") {
         Navigator.pop(context);
       } else if (value == "⌫") {
@@ -30,8 +37,28 @@ class _NumberPadSheetState extends State<NumberPadSheet> {
           amount += value;
         }
       }
+
       widget.onAmountSelected(amount);
     });
+  }
+
+  void _onSendPressed() {
+    final double enteredAmount = double.tryParse(amount) ?? 0.0;
+
+    if (enteredAmount <= 3000) {
+      Navigator.pushNamed(
+        context,
+        '/passcode',
+        arguments: {
+          'studentId': widget.studentId,
+          'amount': enteredAmount,
+        },
+      );
+    } else {
+      setState(() {
+        errorMessage = 'Insufficient Balance';
+      });
+    }
   }
 
   @override
@@ -71,9 +98,17 @@ class _NumberPadSheetState extends State<NumberPadSheet> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          if (errorMessage != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                errorMessage!,
+                style: TextStyle(color: Colors.red, fontSize: 16),
+              ),
+            ),
           SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: _onSendPressed,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlueAccent,
               foregroundColor: Colors.white,

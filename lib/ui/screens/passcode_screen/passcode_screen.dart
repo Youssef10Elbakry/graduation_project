@@ -8,14 +8,16 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class PasscodeScreen extends StatelessWidget {
   static const routeName = '/passcode';
+
   final String studentId;
   final double amount;
+
   final secureStorage = const FlutterSecureStorage();
 
   const PasscodeScreen({
     super.key,
-    required this.studentId,
-    required this.amount,
+    this.studentId = "default_student_123", // ✅ temporary default
+    this.amount = 50.0,                     // ✅ temporary default
   });
 
   @override
@@ -49,18 +51,17 @@ class PasscodeScreen extends StatelessWidget {
                       'Enter your passcode to confirm',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
-                        fontSize: 22, 
-                        fontWeight: FontWeight.w600, 
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
                   const SizedBox(height: 60),
-                  // Passcode placeholders
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                       PasscodeProvider.maxDigits,
-                      (index) {
+                          (index) {
                         bool filled = index < passcodeProvider.digits.length;
                         return Container(
                           margin: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -75,26 +76,25 @@ class PasscodeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 60),
-                  // Increased height
                   Expanded(
                     child: Keypad(
                       onDigitPressed: passcodeProvider.isLoading
                           ? null
                           : (digit) async {
-                              final token = await secureStorage.read(key: "authentication_key");
-                              passcodeProvider.addDigit(
-                                digit,
-                                context,
-                                studentId,
-                                amount,
-                                token ?? '',
-                              );
-                            },
+                        final token = await secureStorage.read(key: "authentication_key");
+                        passcodeProvider.addDigit(
+                          digit,
+                          context,
+                          studentId,
+                          amount,
+                          token ?? '',
+                        );
+                      },
                       onBackspacePressed: passcodeProvider.isLoading
                           ? null
                           : () {
-                              passcodeProvider.removeLastDigit();
-                            },
+                        passcodeProvider.removeLastDigit();
+                      },
                     ),
                   ),
                 ],

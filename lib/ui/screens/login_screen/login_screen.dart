@@ -5,8 +5,8 @@ import 'package:graduation_project/ui/widgets/welcome_and_login_button.dart';
 
 class LoginScreen extends StatelessWidget {
   static String screenName = "Login Screen";
- static TextEditingController emailController = TextEditingController();
- static TextEditingController passController = TextEditingController();
+  static TextEditingController emailController = TextEditingController();
+  static TextEditingController passController = TextEditingController();
   LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
               const Spacer(flex: 9,),
               TextButton(onPressed: (){},
                   child: const Text("Forgot your password?", style: TextStyle(fontFamily: "Poppins", fontSize: 16,
-                  fontWeight: FontWeight.w600, color: Color(0xff1F41BB)),
+                      fontWeight: FontWeight.w600, color: Color(0xff1F41BB)),
                   )),
               const Spacer(flex: 1,)
             ],

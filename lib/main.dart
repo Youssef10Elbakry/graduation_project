@@ -64,14 +64,14 @@ class MyApp extends StatelessWidget {
         ErrorScreen.routeName: (_) => const ErrorScreen(),
         ConfirmationScreen.routeName: (_) => const ConfirmationScreen(),
         PasscodeScreen.routeName: (_) => const PasscodeScreen(),
-        ForgotPasswordScreen.screenName: (_) => const ForgotPasswordScreen(),
-        VerificationScreen.screenName: (_) => const VerificationScreen(),
-        NewPasswordScreen.screenName: (_) => const NewPasswordScreen(),
-        SuccessfulScreen.screenName: (_) => const SuccessfulScreen(),
+        ForgotPasswordScreen.routeName: (_) => const ForgotPasswordScreen(),
+        VerificationScreen.routeName: (_) => const VerificationScreen(),
+        SetNewPasswordScreen.routeName: (_) => const SetNewPasswordScreen(),
+        SuccessfulScreen.routeName: (_) => const SuccessfulScreen(),
 
 
         AmountSelectionSheet.routeName: (_) => const AmountSelectionSheet(),
-        NumberPadSheet.routeName: (_) => const NumberPadSheet(),
+
       },
       initialRoute: StudentProfileScreen.screenName,
     );
