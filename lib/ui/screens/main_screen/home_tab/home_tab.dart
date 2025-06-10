@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graduation_project/ui/providers/home_tab_provider.dart';
+import 'package:graduation_project/ui/screens/main_screen/home_tab/grades_button.dart';
 import 'package:graduation_project/ui/screens/main_screen/widgets/child_avatar.dart';
 import 'package:graduation_project/ui/screens/main_screen/home_tab/home_insights_container.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class _HomeTabState extends State<HomeTab> {
     Future.microtask(() async {
       final String token = (await secureStorage.read(key: "authentication_key"))!;
       Provider.of<HomeTabProvider>(context, listen: false).getChildren();
+      Provider.of<HomeTabProvider>(context, listen: false).getParentProfileData();
       print("Token: $token");
     });
   }
@@ -43,16 +45,16 @@ class _HomeTabState extends State<HomeTab> {
         Row(
           children: [
             SizedBox(width: screenWidth*0.0446,),
-            Image.asset("assets/images/mahmoud_home.png"),
+            CircleAvatar(backgroundImage: NetworkImage(provider.parentProfilePictureLink),),
             SizedBox(width: screenWidth*0.0117,),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Welcome Back,", style: TextStyle(
+                const Text("Welcome Back,", style: TextStyle(
                   color: Colors.grey,
                   fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Prompt"
                 ),),
-                Text("Mahmoud Ayman", style: TextStyle(
+                Text(provider.parentUsername, style: const TextStyle(
                   color: Color(0xff000000),
                     fontSize: 16, fontWeight: FontWeight.w400, fontFamily: "Prompt",
                 ),)
@@ -98,27 +100,36 @@ class _HomeTabState extends State<HomeTab> {
           )),
 
         SizedBox(height: 20),
-        Visibility(
-          visible: provider.insightsVisible,
-          child: Column(children: [
-            Row(
-              children: [
-                SizedBox(width: screenWidth*0.089,),
-                Text("Insights", style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20
-                ),),
-              ],
+        SizedBox(
+          height: 300,
+          child: Visibility(
+            visible: provider.insightsVisible,
+            child: SingleChildScrollView(
+              child: SizedBox(
+                child: Column(children: [
+                  Row(
+                    children: [
+                      SizedBox(width: screenWidth*0.069,),
+                      const Text("Insights", style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20
+                      ),),
+                    ],
+                  ),
+                  SizedBox(height: screenHeight*0.03676,),
+                  Center(child: HomeInsightsContainer(title: "Attendance", num: provider.attendancePercentage,
+                  presentPercentage: provider.presentPercentage, absentPercentage: provider.absentPercentage,
+                    latePercentage: provider.latePercentage,)),
+                  SizedBox(height: screenHeight*0.015756,),
+                  Center(child: HomeInsightsContainer(title: "Expediences", num: provider.expendiences,)),
+                  SizedBox(height: screenHeight*0.015756,),
+                  GradesButton(id: provider.childId)
+                ],),
+              ),
             ),
-            SizedBox(height: screenHeight*0.03676,),
-            Center(child: HomeInsightsContainer(title: "Attendance", num: provider.attendancePercentage,
-            presentPercentage: provider.presentPercentage, absentPercentage: provider.absentPercentage,
-              latePercentage: provider.latePercentage,)),
-            SizedBox(height: screenHeight*0.015756,),
-            Center(child: HomeInsightsContainer(title: "Expediences", num: provider.expendiences,))
-          ],),
+          ),
         )
       ],
     );

@@ -11,7 +11,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "x86"
+			"value" : "x86_64"
 		},
 		{
 			"name" : "ANDROID_NDK",
@@ -23,7 +23,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "C:\\Users\\Youssef Hatem\\AppData\\Local\\Android\\sdk\\ndk\\26.3.11579264"
+			"value" : "C:\\Users\\Youssef Hatem\\AppData\\Local\\Android\\Sdk\\ndk\\26.3.11579264"
 		},
 		{
 			"name" : "ANDROID_PLATFORM",
@@ -63,7 +63,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "x86"
+			"value" : "x86_64"
 		},
 		{
 			"name" : "CMAKE_ANDROID_NDK",
@@ -75,7 +75,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "C:\\Users\\Youssef Hatem\\AppData\\Local\\Android\\sdk\\ndk\\26.3.11579264"
+			"value" : "C:\\Users\\Youssef Hatem\\AppData\\Local\\Android\\Sdk\\ndk\\26.3.11579264"
 		},
 		{
 			"name" : "CMAKE_AR",
@@ -151,7 +151,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "e:/Mobile Applications/Flutter Course/Flutter Technology/graduation_project/android/app/.cxx/Debug/366n3m1k/x86"
+			"value" : "e:/Mobile Applications/Flutter Course/Flutter Technology/graduation_project/android/app/.cxx/Debug/366n3m1k/x86_64"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -751,7 +751,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "E:\\Mobile Applications\\Flutter Course\\Flutter Technology\\graduation_project\\build\\app\\intermediates\\cxx\\Debug\\366n3m1k\\obj\\x86"
+			"value" : "E:\\Mobile Applications\\Flutter Course\\Flutter Technology\\graduation_project\\build\\app\\intermediates\\cxx\\Debug\\366n3m1k\\obj\\x86_64"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -1023,7 +1023,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "E:\\Mobile Applications\\Flutter Course\\Flutter Technology\\graduation_project\\build\\app\\intermediates\\cxx\\Debug\\366n3m1k\\obj\\x86"
+			"value" : "E:\\Mobile Applications\\Flutter Course\\Flutter Technology\\graduation_project\\build\\app\\intermediates\\cxx\\Debug\\366n3m1k\\obj\\x86_64"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1331,7 +1331,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/Mobile Applications/Flutter Course/Flutter Technology/graduation_project/android/app/.cxx/Debug/366n3m1k/x86"
+			"value" : "E:/Mobile Applications/Flutter Course/Flutter Technology/graduation_project/android/app/.cxx/Debug/366n3m1k/x86_64"
 		},
 		{
 			"name" : "Project_IS_TOP_LEVEL",

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '/models/attendance_record.dart';
-import '/services/attendance_service.dart';
+import '../../../models/attendance_record.dart';
+import '../../../services/attendance_service.dart';
 
 class AttendanceScreen extends StatefulWidget {
   final String studentId;

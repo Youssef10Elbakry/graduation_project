@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graduation_project/models/recent_transaction_model.dart';
 import 'package:graduation_project/ui/providers/wallet_tab_provider.dart';
+import 'package:graduation_project/ui/screens/main_screen/wallet_tab/child_action_button.dart';
 import 'package:graduation_project/ui/screens/main_screen/wallet_tab/student_transaction_row.dart';
 import 'package:graduation_project/ui/screens/main_screen/wallet_tab/visa_container.dart';
 import 'package:graduation_project/ui/screens/transactions_details/transactions_details.dart';
@@ -23,11 +24,13 @@ class _WalletTabState extends State<WalletTab> {
   void initState() {
     super.initState();
 
-    
+    final provider = Provider.of<WalletTabProvider>(context, listen: false);
+    // provider.requestBottomSheet = (message){Navigator.pushNam};
     Future.microtask(() async {
       final String token = (await secureStorage.read(key: "authentication_key"))!;
       Provider.of<WalletTabProvider>(context, listen: false).getChildren();
       Provider.of<WalletTabProvider>(context, listen: false).getRecentTransactions();
+      Provider.of<WalletTabProvider>(context, listen: false).getParentProfileData();
       print("Token: $token");
     });
   }
@@ -45,7 +48,7 @@ late WalletTabProvider provider;
             children: [
               Text("Wallet", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35, fontFamily: "Montserrat"),),
               Spacer(),
-              CircleAvatar(backgroundImage: AssetImage("assets/images/mahmoud_home.png"),),
+              CircleAvatar(backgroundImage: NetworkImage(provider.parentProfilePictureLink),),
 
             ],
           ),
@@ -61,8 +64,9 @@ late WalletTabProvider provider;
         ),
         SizedBox(height: height*0.021,),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 0, horizontal: width*0.049),
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 17),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // SizedBox(width: width*0.089,),
               const Text("Children", style: TextStyle(
@@ -71,27 +75,15 @@ late WalletTabProvider provider;
                   fontWeight: FontWeight.w600,
                   fontSize: 30
               ),),
-              const Spacer(),
-              SizedBox(
-                height: height*0.0336,
-                  width: width*0.390625,
-                  child: ElevatedButton(onPressed: (){},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xffE8E8E8), // Change background color
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8), // Set border radius
-                          side: const BorderSide(color: Color(0xffE8E8E8), width: 1), // Set border
-                        ),
-                      ),
-
-                      child: Row(
-                        children: [
-                          const Text("Transaction History",
-                            style: TextStyle(fontSize: 12, color: Color(0xffA8AAAF)),),
-                          const Spacer(),
-                          Icon(Icons.arrow_forward_ios, color: const Color(0xffA8AAAF),size: width*0.03571,)
-                        ],
-                      )))
+              // Spacer(),
+              //
+              // Column(
+              //   children: [
+              //     ChildActionButton(text: "Transaction History"),
+              //     SizedBox(height: 10,),
+              //     ChildActionButton(text: "Send Money")
+              //   ],
+              // )
             ],
           ),
         ),

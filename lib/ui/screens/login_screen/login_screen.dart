@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/ui/screens/forgot_password_screens/forgot_password_screen.dart';
 import 'package:graduation_project/ui/screens/login_screen/login_textfield.dart';
 import 'package:graduation_project/ui/widgets/welcome_and_login_button.dart';
 
@@ -31,7 +32,7 @@ class LoginScreen extends StatelessWidget {
           Row(
             children: [
               const Spacer(flex: 9,),
-              TextButton(onPressed: (){},
+              TextButton(onPressed: (){Navigator.pushNamed(context, ForgotPasswordScreen.routeName);},
                   child: const Text("Forgot your password?", style: TextStyle(fontFamily: "Poppins", fontSize: 16,
                       fontWeight: FontWeight.w600, color: Color(0xff1F41BB)),
                   )),

@@ -85,7 +85,7 @@ class _WelcomeAndLoginButtonState extends State<WelcomeAndLoginButton> {
         url,
         headers: headers,
         body: body,
-      ).timeout(Duration(seconds: 20));
+      ).timeout(const Duration(seconds: 20));
 
       print("i am here");
 

@@ -8,13 +8,43 @@ import 'package:http/http.dart' as http;
 class HomeTabProvider extends ChangeNotifier{
 bool isLoadingChildren = true;
 bool insightsVisible = false;
+bool isLoadingInsights = true;
 int attendancePercentage = 0;
 int expendiences = 0;
 double presentPercentage = 0;
 double absentPercentage = 0;
 double latePercentage = 0;
+String childId = "";
+String parentProfilePictureLink = "";
+String parentUsername = "";
 List<ChildModel> children = [];
 final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
+Future<void> getParentProfileData() async {
+  try{
+    final String token = (await secureStorage.read(key: "authentication_key"))!;
+    final url = Uri.parse('https://parentstarck.site/parent/dashboard');
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      parentProfilePictureLink = data['parent']['profilePicture'];
+      parentUsername = data['parent']['username'];
+      print("Parent Profile Picture Link: $parentProfilePictureLink");
+      print("Parent Profile Username: $parentUsername");
+      notifyListeners();
+    } else {
+      print("Error while loading parent profile picture link");
+    }
+  }
+  catch(error){
+    print("$error hhh");
+  }
+}
 
 Future<void> getChildren() async {
   children = [];
@@ -50,11 +80,13 @@ Future<void> getChildren() async {
 }
 Future<void> onChildTapped(String id)async {
   try {
+    isLoadingInsights = true;
     attendancePercentage = 0;
     expendiences = 0;
     presentPercentage = 0;
     absentPercentage = 0;
     latePercentage = 0;
+    childId = id;
     final String token = (await secureStorage.read(key: "authentication_key"))!;
     print("Token in Home Tab Provider: $token");
     final url = Uri.parse(
@@ -88,6 +120,7 @@ Future<void> onChildTapped(String id)async {
       print("Error in Loading Insights");
     }
     insightsVisible = true;
+    isLoadingInsights = false;
     notifyListeners();
   }
   catch (error) {

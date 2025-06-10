@@ -10,9 +10,38 @@ import 'package:http/http.dart' as http;
 class WalletTabProvider extends ChangeNotifier{
   bool isLoadingChildren = true;
   bool isLoadingRecentTransactions = true;
+  Function(String message)? requestBottomSheet;
   List<ChildModel> children = [];
   List<RecentTransaction> recentTransactions = [];
+  String parentProfilePictureLink = "";
+  String parentUsername = "";
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
+  Future<void> getParentProfileData() async {
+    try{
+      final String token = (await secureStorage.read(key: "authentication_key"))!;
+    final url = Uri.parse('https://parentstarck.site/parent/dashboard');
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      parentProfilePictureLink = data['parent']['profilePicture'];
+      parentUsername = data['parent']['username'];
+      print("Parent Profile Picture Link: $parentProfilePictureLink");
+      print("Parent Profile Username: $parentUsername");
+      notifyListeners();
+    } else {
+      print("Error while loading parent profile picture link");
+    }
+  }
+  catch(error){
+  print("$error hhh");
+  }
+}
 
   Future<void> getChildren() async {
     children = [];

@@ -12,9 +12,16 @@ class ChildAvatar extends StatefulWidget {
 
   @override
   State<ChildAvatar> createState() => _ChildAvatarState();
+
 }
 
 class _ChildAvatarState extends State<ChildAvatar> {
+  @override
+  void initState(){
+    super.initState();
+
+
+  }
   late HomeTabProvider homeTabProvider;
   late WalletTabProvider walletTabProvider;
   @override
@@ -34,6 +41,9 @@ class _ChildAvatarState extends State<ChildAvatar> {
 
         },
         child: CircleAvatar(
+          onBackgroundImageError: (_,d){
+            print("Error in loading image");
+          },
           backgroundImage: NetworkImage(widget.childModel.profilePictureLink),
           radius: 36,
         ),
