@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/ui/screens/forgot_password_screens/successful_screen.dart';
-
-import 'package:graduation_project/ui/widgets/custom_button.dart';
-import 'package:graduation_project/ui/widgets/custom_icon_button.dart';
-import 'package:graduation_project/ui/widgets/custom_text.dart';
-import 'package:graduation_project/ui/widgets/custom_text_field.dart';
-
-import '../login_screen/login_screen.dart';
-
+import '../../../services/forgot_password_service.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/custom_icon_button.dart';
+import '../../widgets/custom_text.dart';
+import '../../widgets/custom_text_field.dart';
+import 'successful_screen.dart';
 
 class SetNewPasswordScreen extends StatefulWidget {
-  static const String routeName = '/new_password_screen';
-  const SetNewPasswordScreen({super.key});
+  final String email;
+  final String verificationCode; // This is the OTP passed from VerificationScreen
+  final String token;
+
+  const SetNewPasswordScreen({
+    super.key,
+    required this.email,
+    required this.verificationCode,
+    required this.token,
+  });
 
   @override
   State<SetNewPasswordScreen> createState() => _SetNewPasswordScreenState();
@@ -21,40 +26,65 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
   String? _errorText;
+  bool _isLoading = false;
 
-  // Function to handle the password validation and navigation
-  void _handleUpdatePassword() {
+  Future<void> _handleUpdatePassword() async {
     final password = _passwordController.text.trim();
     final confirmPassword = _confirmPasswordController.text.trim();
 
-    // Check if either field is empty
     if (password.isEmpty || confirmPassword.isEmpty) {
       setState(() {
-        _errorText = "Please fill out both fields.";  // Show error message
+        _errorText = "Please fill out both fields.";
       });
+      return;
     }
-    // Check if the passwords match
-    else if (password != confirmPassword) {
+    if (password != confirmPassword) {
       setState(() {
-        _errorText = "Passwords do not match.";  // Show mismatch error
+        _errorText = "Passwords do not match.";
       });
+      return;
     }
-    // If validation passes, navigate to the SuccessfulScreen
-    else {
-      setState(() {
-        _errorText = null;  // Clear error message
-      });
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const SuccessfulScreen()),
+
+    setState(() {
+      _errorText = null;
+      _isLoading = true;
+    });
+
+    try {
+      bool success = await ForgotPasswordService.updatePassword(
+        password,
+        widget.verificationCode,
+        widget.token,
       );
+
+      if (success) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const SuccessfulScreen()),
+        );
+      } else {
+        setState(() {
+          _errorText = "Failed to update password. Please try again.";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _errorText = "An error occurred. Please try again.";
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: CustomIconButton(),title: const Text("Set a New Password")),
+      appBar: AppBar(
+        leading: CustomIconButton(),
+        title: const Text("Set a New Password"),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -64,29 +94,19 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
               text: "Create a new password. Ensure it differs from previous ones for security",
             ),
             const SizedBox(height: 10),
-
-            const CustomText(
-              text: "Password",
-              color: Colors.black,
-            ),
+            const CustomText(text: "Password", color: Colors.black),
             CustomTextField(
               hintText: "Enter new password",
               controller: _passwordController,
               obscureText: true,
             ),
-
             const SizedBox(height: 10),
-            const CustomText(
-              text: "Confirm Password",
-              color: Colors.black,
-            ),
+            const CustomText(text: "Confirm Password", color: Colors.black),
             CustomTextField(
               hintText: "Confirm new password",
               controller: _confirmPasswordController,
               obscureText: true,
             ),
-
-            // Display error message if validation fails
             if (_errorText != null) ...[
               const SizedBox(height: 10),
               Text(
@@ -94,11 +114,12 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                 style: const TextStyle(color: Colors.red, fontSize: 16),
               ),
             ],
-
             const SizedBox(height: 20),
-            CustomButton(
+            _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : CustomButton(
               text: "Update Password",
-              onTap: _handleUpdatePassword,  // Call the _handleUpdatePassword function on tap
+              onTap: _handleUpdatePassword,
             ),
           ],
         ),
