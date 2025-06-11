@@ -49,24 +49,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        SplashScreen.screenName: (_) => SplashScreen(),
-        WelcomeScreen.screenName: (_) => const WelcomeScreen(),
-        LoginScreen.screenName: (_) => LoginScreen(),
-        MainScreen.screenName: (_) => const MainScreen(),
-        SettingsScreen.screenName: (_) => const SettingsScreen(),
-        StudentProfileScreen.screenName: (_) => StudentProfileScreen(),
-        PaymentSuccessfulScreen.routeName: (_) => const PaymentSuccessfulScreen(),
-        ErrorScreen.routeName: (_) => const ErrorScreen(),
-        ConfirmationScreen.routeName: (_) => const ConfirmationScreen(),
-        PasscodeScreen.routeName: (_) => const PasscodeScreen(),
-        ForgotPasswordScreen.routeName: (_) => const ForgotPasswordScreen(),
-        SuccessfulScreen.routeName: (_) => const SuccessfulScreen(),
+        debugShowCheckedModeBanner: false,
+        routes: {
+          SplashScreen.screenName: (_) => SplashScreen(),
+          WelcomeScreen.screenName: (_) => const WelcomeScreen(),
+          LoginScreen.screenName: (_) => LoginScreen(),
+          MainScreen.screenName: (_) => const MainScreen(),
+          SettingsScreen.screenName: (_) => const SettingsScreen(),
+          StudentProfileScreen.screenName: (_) => StudentProfileScreen(),
+          PaymentSuccessfulScreen.routeName: (_) => const PaymentSuccessfulScreen(),
+          ErrorScreen.routeName: (_) => const ErrorScreen(),
+          ConfirmationScreen.routeName: (_) => const ConfirmationScreen(),
+          PasscodeScreen.routeName: (_) => const PasscodeScreen(),
+          ForgotPasswordScreen.routeName: (_) => const ForgotPasswordScreen(),
+          SuccessfulScreen.routeName: (_) => const SuccessfulScreen(),
 
 
-      },
+        },
 
+    initialRoute: MainScreen.screenName,
 
     );
   }
