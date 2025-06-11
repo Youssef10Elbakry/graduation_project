@@ -19,13 +19,10 @@ import 'package:provider/provider.dart';
 import 'ui/providers/passcode_provider.dart';
 import 'ui/providers/comfirmation_provider.dart';
 import 'package:graduation_project/ui/screens/forgot_password_screens/forgot_password_screen.dart';
-import 'package:graduation_project/ui/screens/forgot_password_screens/verification_screen.dart';
-import 'package:graduation_project/ui/screens/forgot_password_screens/new_password_screen.dart';
+
 import 'package:graduation_project/ui/screens/forgot_password_screens/successful_screen.dart';
 
 
-import 'package:graduation_project/ui/screens/amount_screens/amount_selection_sheet.dart';
-import 'package:graduation_project/ui/screens/amount_screens/number_pad_sheet.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,15 +62,13 @@ class MyApp extends StatelessWidget {
         ConfirmationScreen.routeName: (_) => const ConfirmationScreen(),
         PasscodeScreen.routeName: (_) => const PasscodeScreen(),
         ForgotPasswordScreen.routeName: (_) => const ForgotPasswordScreen(),
-        VerificationScreen.routeName: (_) => const VerificationScreen(),
-        SetNewPasswordScreen.routeName: (_) => const SetNewPasswordScreen(),
         SuccessfulScreen.routeName: (_) => const SuccessfulScreen(),
 
 
-        AmountSelectionSheet.routeName: (_) => const AmountSelectionSheet(),
 
       },
-      initialRoute: StudentProfileScreen.screenName,
+      initialRoute:StudentProfileScreen.screenName,
+
     );
   }
 }
