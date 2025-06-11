@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
 
 
       },
-      initialRoute:StudentProfileScreen.screenName,
+      initialRoute:MainScreen.screenName,
 
     );
   }
