@@ -65,7 +65,6 @@ class MyApp extends StatelessWidget {
         SuccessfulScreen.routeName: (_) => const SuccessfulScreen(),
 
 
-
       },
       initialRoute:MainScreen.screenName,
 
