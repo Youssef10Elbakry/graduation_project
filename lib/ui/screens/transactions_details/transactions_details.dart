@@ -6,6 +6,7 @@ import '../../widgets/transaction_trend_chart.dart';
 import '../../widgets/transaction_month_group.dart';
 
 class TransactionsDetailsScreen extends StatefulWidget {
+  static const String routeName = '/transactions-details';
   const TransactionsDetailsScreen({super.key});
 
   @override
@@ -68,10 +69,10 @@ class _TransactionsDetailsScreenState extends State<TransactionsDetailsScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new, color: Color(0xFF2F2F2F)),
+          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF2F2F2F)),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
+        title: const Text(
           'Transactions',
           style: TextStyle(
             color: Color(0xFF2F2F2F),
@@ -82,11 +83,11 @@ class _TransactionsDetailsScreenState extends State<TransactionsDetailsScreen> {
         centerTitle: true,
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
               onRefresh: _loadData,
               child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
                     TransactionTrendChart(

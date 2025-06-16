@@ -23,7 +23,8 @@ class _AttendanceTabBarViewState extends State<AttendanceTabBarView> {
               const Spacer(),
               TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const AttendanceScreen(studentId: "1")));
+                  // TODO: Replace with actual student ID
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const AttendanceScreen(studentId: "68338d3b5918955bae6677a6")));
                 },
                 child: const Text("View All", style: TextStyle(color: Color(0xff3491DB), fontSize: 16, fontWeight: FontWeight.w500)),
               )

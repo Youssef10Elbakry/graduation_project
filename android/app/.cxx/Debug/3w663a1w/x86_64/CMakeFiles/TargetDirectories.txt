@@ -1,0 +1,2 @@
+C:/Users/LENOVO/Downloads/graduation_project/android/app/.cxx/Debug/3w663a1w/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/LENOVO/Downloads/graduation_project/android/app/.cxx/Debug/3w663a1w/x86_64/CMakeFiles/rebuild_cache.dir

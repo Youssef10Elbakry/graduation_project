@@ -6,6 +6,7 @@ import '../../../models/attendance_record.dart';
 import '../../../services/attendance_service.dart';
 
 class AttendanceScreen extends StatefulWidget {
+  static String screenName = "Attendance Screen";
   final String studentId;
 
   const AttendanceScreen({super.key, required this.studentId});

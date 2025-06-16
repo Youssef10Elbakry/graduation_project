@@ -7,8 +7,10 @@ import 'package:graduation_project/ui/providers/user_profile_provider.dart';
 import 'package:graduation_project/ui/providers/wallet_tab_provider.dart';
 import 'package:graduation_project/ui/providers/passcode_provider.dart';
 import 'package:graduation_project/ui/providers/comfirmation_provider.dart';
+import 'package:graduation_project/ui/screens/attendence_screen/attendance_screen.dart';
 
 import 'package:graduation_project/ui/screens/splash_screen.dart';
+import 'package:graduation_project/ui/screens/transactions_details/transactions_details.dart';
 import 'package:graduation_project/ui/screens/welcome_screen/welcome_screen.dart';
 import 'package:graduation_project/ui/screens/login_screen/login_screen.dart';
 import 'package:graduation_project/ui/screens/main_screen/main_screen.dart';
@@ -56,12 +58,23 @@ class MyApp extends StatelessWidget {
         MainScreen.screenName: (_) => const MainScreen(),
         SettingsScreen.screenName: (_) => const SettingsScreen(),
         StudentProfileScreen.screenName: (_) => StudentProfileScreen(),
+        AttendanceScreen.screenName: (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          return AttendanceScreen(studentId: args['studentId']);
+        },
         PaymentSuccessfulScreen.routeName: (_) => const PaymentSuccessfulScreen(),
         ErrorScreen.routeName: (_) => const ErrorScreen(),
         ConfirmationScreen.routeName: (_) => const ConfirmationScreen(),
-        PasscodeScreen.routeName: (_) => const PasscodeScreen(),
+        PasscodeScreen.routeName: (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          return PasscodeScreen(
+            studentId: args['studentId'],
+            amount: args['amount'],
+          );
+        },
         ForgotPasswordScreen.routeName: (_) => const ForgotPasswordScreen(),
         SuccessfulScreen.routeName: (_) => const SuccessfulScreen(),
+        TransactionsDetailsScreen.routeName: (_) => const TransactionsDetailsScreen(),
       },
       initialRoute: MainScreen.screenName,
     );
