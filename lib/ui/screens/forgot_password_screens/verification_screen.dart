@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/ui/widgets/custom_button.dart';
+import 'package:graduation_project/ui/widgets/custom_icon_button.dart';
+import 'package:graduation_project/ui/widgets/custom_text.dart';
+import 'package:graduation_project/ui/widgets/custom_text_field.dart';
 import 'new_password_screen.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -18,16 +22,20 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
-  final TextEditingController _codeController = TextEditingController();
+  final List<TextEditingController> _controllers =
+  List.generate(5, (_) => TextEditingController());
+  final List<FocusNode> _focusNodes = List.generate(5, (_) => FocusNode());
+  List<bool> _isFilled = List.generate(5, (_) => false);
+
   String? _errorText;
   bool _isLoading = false;
 
   Future<void> _verifyCode() async {
-    final code = _codeController.text.trim();
+    String code = _controllers.map((c) => c.text).join();
 
-    if (code.isEmpty) {
+    if (code.isEmpty || code.length < 5) {
       setState(() {
-        _errorText = "Please enter the verification code.";
+        _errorText = "Please enter the full 5-digit verification code.";
       });
       return;
     }
@@ -39,7 +47,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
     try {
       if (code == widget.pinAuth) {
-        // Navigate and pass email, token, and the entered OTP (pinAuth)
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -66,20 +73,104 @@ class _VerificationScreenState extends State<VerificationScreen> {
     }
   }
 
+  InputDecoration _buildDecoration(int index) {
+    final bool filled = _isFilled[index];
+    return InputDecoration(
+      hintText: '',
+      counterText: '', // Removes the "0/1"
+      contentPadding: const EdgeInsets.symmetric(vertical: 16),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.0),
+        borderSide: BorderSide(
+          color: filled ? Colors.blue : Colors.grey,
+          width: 2.0,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.0),
+        borderSide: const BorderSide(
+          color: Colors.blue,
+          width: 2.0
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCodeField(int index) {
+    return SizedBox(
+      width: 50,
+      child: TextField(
+        controller: _controllers[index],
+        focusNode: _focusNodes[index],
+        textAlign: TextAlign.center,
+        maxLength: 1,
+        keyboardType: TextInputType.number,
+        decoration: _buildDecoration(index),
+        onChanged: (value) {
+          setState(() {
+            _isFilled[index] = value.isNotEmpty;
+          });
+
+          if (value.isNotEmpty && index < 4) {
+            FocusScope.of(context).requestFocus(_focusNodes[index + 1]);
+          } else if (value.isEmpty && index > 0) {
+            FocusScope.of(context).requestFocus(_focusNodes[index - 1]);
+          }
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    for (final controller in _controllers) {
+      controller.dispose();
+    }
+    for (final node in _focusNodes) {
+      node.dispose();
+    }
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Verify Code')),
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(20),
+          child: CustomIconButton(),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("A verification code was sent to ${widget.email}."),
+            const Text(
+              "Check your email",
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                children: [
+                  const TextSpan(text: "A verification code was sent to "),
+                  TextSpan(
+                    text: widget.email,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const TextSpan(text: ". Enter the 5 digits mentioned in the email."),
+                ],
+              ),
+            ),
+
             const SizedBox(height: 16),
-            TextField(
-              controller: _codeController,
-              decoration: const InputDecoration(labelText: "Enter Code"),
-              keyboardType: TextInputType.number,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(5, (index) => _buildCodeField(index)),
             ),
             if (_errorText != null) ...[
               const SizedBox(height: 8),
@@ -88,13 +179,42 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 style: const TextStyle(color: Colors.red),
               ),
             ],
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             _isLoading
-                ? const CircularProgressIndicator()
-                : ElevatedButton(
-              onPressed: _verifyCode,
-              child: const Text("Verify"),
+                ? const Center(child: CircularProgressIndicator())
+                : CustomButton(
+              text: "Verify Code",
+              onTap: _verifyCode,
             ),
+            SizedBox(height:20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Haven’t got the email yet?",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey[800], // Dark grey
+                  ),
+                ),
+                const SizedBox(width: 5),
+                GestureDetector(
+                  onTap: () {
+                    print("Resend email tapped");
+                  },
+                  child: Text(
+                    "Resend to email",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: const Color(0xFF1F41BB),
+                      decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            )
+
           ],
         ),
       ),

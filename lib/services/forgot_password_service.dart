@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 class ForgotPasswordService {
   static const String baseUrl = 'https://parentstarck.site/parent';
 
-  // Send forgot password request, get pinAuth and token
+  // Send forgot password request
   static Future<Map<String, dynamic>?> sendForgotPasswordRequest(String email) async {
     final url = Uri.parse('$baseUrl/forgetPassword');
     final response = await http.post(
@@ -16,7 +16,7 @@ class ForgotPasswordService {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       return {
-        'pinAuth': data['pinAuth'].toString(),
+        'pinAuth': data['pinAuth'].toString(), // Ensure it's passed as a string
         'token': data['token'],
       };
     } else {
@@ -24,9 +24,15 @@ class ForgotPasswordService {
     }
   }
 
-  // Update password with Authorization header including the Bearer token
+  // ✅ Update password using pinAuth as STRING (not int)
   static Future<bool> updatePassword(String password, String otp, String token) async {
     final url = Uri.parse('$baseUrl/updatePassword');
+
+    print('=== DEBUG: updatePassword ===');
+    print('Sending password: $password');
+    print('Sending pinAuth as string: $otp');
+    print('Token: $token');
+
     final response = await http.put(
       url,
       headers: {
@@ -35,7 +41,7 @@ class ForgotPasswordService {
       },
       body: jsonEncode({
         'password': password,
-        'pinAuth': int.tryParse(otp),
+        'pinAuth': otp, // ✅ Pass as string
       }),
     );
 
