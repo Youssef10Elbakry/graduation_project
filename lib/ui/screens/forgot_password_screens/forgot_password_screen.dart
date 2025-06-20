@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/ui/widgets/custom_button.dart';
+import 'package:graduation_project/ui/widgets/custom_text.dart';
+import 'package:graduation_project/ui/widgets/custom_text_field.dart';
+import 'package:graduation_project/ui/widgets/custom_icon_button.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'verification_screen.dart';
-// ✅✅"email" : "kavon_cormier-baumbach@hotmail.com"
+
 class ForgotPasswordScreen extends StatefulWidget {
   static const String routeName = '/forgot_password_screen';
   const ForgotPasswordScreen({super.key});
@@ -31,7 +35,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       _errorText = null;
     });
 
-    // ✅ PUT HEADERS HERE
     final url = Uri.parse('https://parentstarck.site/parent/forgetPassword');
     final headers = {
       'Content-Type': 'application/json',
@@ -58,12 +61,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
             ),
           );
-
-
-
-
-
-
         } else {
           setState(() {
             _errorText = data['message'] ?? "Something went wrong.";
@@ -86,21 +83,49 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Forgot Password')),
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(20),
+          child: CustomIconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, "Login Screen");
+            },
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Please enter your email to reset the password."),
+            const Text(
+              "Forgot Password",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const CustomText(
+              text: "Please enter your email to reset the password",
+            ),
             const SizedBox(height: 16),
-            TextField(
+            const Text(
+              "Your Email",
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            CustomTextField(
+              hintText: "Email Address",
               controller: _emailController,
-              decoration: const InputDecoration(labelText: "Email"),
             ),
             if (_errorText != null) ...[
               const SizedBox(height: 8),
@@ -112,9 +137,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             const SizedBox(height: 16),
             _isLoading
                 ? const CircularProgressIndicator()
-                : ElevatedButton(
-              onPressed: _handleResetPassword,
-              child: const Text("Reset Password"),
+                : CustomButton(
+              text: "Reset Password",
+              onTap: _handleResetPassword,
             ),
           ],
         ),

@@ -6,7 +6,7 @@ class CustomText extends StatelessWidget {
   const CustomText({
     super.key,
     required this.text,
-    this.color = const Color(0xFF989898),
+    this.color = const Color(0xE8989898)
 
   });
 
