@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:graduation_project/ui/providers/home_tab_provider.dart';
 import 'package:graduation_project/ui/providers/sign_in_button_provider.dart';
 import 'package:graduation_project/ui/providers/student_profile_tab_bar_provider.dart';
@@ -7,8 +8,9 @@ import 'package:graduation_project/ui/providers/user_profile_provider.dart';
 import 'package:graduation_project/ui/providers/wallet_tab_provider.dart';
 import 'package:graduation_project/ui/providers/passcode_provider.dart';
 import 'package:graduation_project/ui/providers/comfirmation_provider.dart';
-import 'package:graduation_project/ui/screens/attendence_screen/attendance_screen.dart';
 
+import 'package:graduation_project/ui/screens/attendence_screen/attendance_screen.dart';
+import 'package:graduation_project/ui/screens/grades_screen/grades_screen.dart';
 import 'package:graduation_project/ui/screens/splash_screen.dart';
 import 'package:graduation_project/ui/screens/transactions_details/transactions_details.dart';
 import 'package:graduation_project/ui/screens/welcome_screen/welcome_screen.dart';
@@ -22,8 +24,7 @@ import 'package:graduation_project/ui/screens/passcode_screen/passcode_screen.da
 import 'package:graduation_project/ui/screens/passcode_screen/success_screen.dart';
 import 'package:graduation_project/ui/screens/forgot_password_screens/forgot_password_screen.dart';
 import 'package:graduation_project/ui/screens/forgot_password_screens/successful_screen.dart';
-
-import 'package:provider/provider.dart';
+import 'package:graduation_project/ui/screens/main_screen/profile_tab/profile_tab.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +76,8 @@ class MyApp extends StatelessWidget {
         ForgotPasswordScreen.routeName: (_) => const ForgotPasswordScreen(),
         SuccessfulScreen.routeName: (_) => const SuccessfulScreen(),
         TransactionsDetailsScreen.routeName: (_) => const TransactionsDetailsScreen(),
+        GradesScreen.routeName: (_) => const GradesScreen(),
+        ProfileTab.screenName: (_) =>  ProfileTab(),
       },
       initialRoute: MainScreen.screenName,
     );
