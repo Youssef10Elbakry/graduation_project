@@ -34,26 +34,30 @@ class _AttendanceTabBarViewState extends State<AttendanceTabBarView> {
         ),
         const SizedBox(height: 20,),
         SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: SizedBox(
-            width: width,
-            child: DataTable(
-              columnSpacing: 20,
-              headingRowHeight: 40,
-              dataRowHeight: 50,
-              columns: const [
-                DataColumn(label: Text('Status', style: TextStyle(fontWeight: FontWeight.bold))),
-                DataColumn(label: Text('Date', style: TextStyle(fontWeight: FontWeight.bold))),
-                DataColumn(label: Text('Login Time', style: TextStyle(fontWeight: FontWeight.bold))),
-              ],
-              rows: [
-                _buildRow('PRESENT', '2024/09/30', '8:30', Colors.green),
-                _buildRow('PRESENT', '2023/09/29', '8:30', Colors.green),
-                _buildRow('LATE', '2023/09/28', '9:00', Colors.orange),
-                _buildRow('PRESENT', '2023/09/27', '8:30', Colors.green),
-                _buildRow('PRESENT', '2023/09/26', '8:30', Colors.green),
-                _buildRow('ABSENT', '2023/09/25', '-', Colors.red),
-              ],
+          scrollDirection: Axis.vertical,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SizedBox(
+              width: width,
+              child: DataTable(
+                columnSpacing: 20,
+                headingRowHeight: 40,
+                dataRowHeight: 50,
+                columns: const [
+                  DataColumn(label: Text('Status', style: TextStyle(fontWeight: FontWeight.bold))),
+                  DataColumn(label: Text('Date', style: TextStyle(fontWeight: FontWeight.bold))),
+                  DataColumn(label: Text('Login Time', style: TextStyle(fontWeight: FontWeight.bold))),
+                ],
+                rows: [
+                  _buildRow('PRESENT', '2024/09/30', '8:30', Colors.green),
+                  _buildRow('PRESENT', '2023/09/29', '8:30', Colors.green),
+                  _buildRow('LATE', '2023/09/28', '9:00', Colors.orange),
+                  _buildRow('PRESENT', '2023/09/27', '8:30', Colors.green),
+                  _buildRow('PRESENT', '2023/09/26', '8:30', Colors.green),
+                  _buildRow('ABSENT', '2023/09/25', '-', Colors.red),
+                  _buildRow('ABSENT', '2023/09/25', '-', Colors.red),
+                ],
+              ),
             ),
           ),
         ),

@@ -16,7 +16,7 @@ class StudentProfileTextfield extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController(text: infoText);
     return SizedBox(
-      width: labelText == "Age"?150:240,
+      width: labelText == "Age"?140:220,
       height: 55,
       child: TextField(
         controller: controller,

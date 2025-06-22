@@ -34,6 +34,7 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<HomeTabProvider>(context);
+    print("Parent profile picture link ${provider.parentProfilePictureLink}");
     print("Children in the home tab: ${provider.children}");
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -119,7 +120,7 @@ class _HomeTabState extends State<HomeTab> {
                     ],
                   ),
                   SizedBox(height: screenHeight*0.03676,),
-                  Center(child: HomeInsightsContainer(title: "Attendance", num: provider.attendancePercentage,
+                  Center(child: HomeInsightsContainer(title: "Attendance", id: provider.childId, num: provider.attendancePercentage,
                   presentPercentage: provider.presentPercentage, absentPercentage: provider.absentPercentage,
                     latePercentage: provider.latePercentage,)),
                   SizedBox(height: screenHeight*0.015756,),

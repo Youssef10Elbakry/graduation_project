@@ -7,7 +7,7 @@ class StudentProfileBalanceContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
+      width: 140,
       height: 120,
       decoration: BoxDecoration(color: const Color(0xff6156C8), borderRadius: BorderRadius.circular(16)),
       child: Column(

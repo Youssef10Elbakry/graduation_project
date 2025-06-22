@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graduation_project/ui/providers/student_profile_tab_bar_provider.dart';
 import 'package:graduation_project/ui/screens/student_profile_screen/attendance_tab_bar_view.dart';
 import 'package:graduation_project/ui/screens/student_profile_screen/student_profile_appbar.dart';
@@ -7,6 +8,8 @@ import 'package:graduation_project/ui/screens/student_profile_screen/student_pro
 import 'package:graduation_project/ui/screens/student_profile_screen/student_profile_textfield.dart';
 import 'package:graduation_project/ui/screens/student_profile_screen/tab_bar_container.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/student_profile_provider.dart';
 
 class StudentProfileScreen extends StatefulWidget {
   static String screenName = "Student Profile Screen";
@@ -18,8 +21,27 @@ class StudentProfileScreen extends StatefulWidget {
 
 class _StudentProfileScreenState extends State<StudentProfileScreen> {
   late StudentProfileTabBarProvider provider;
+  late String token;
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+  late String childId;
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Delay API call to avoid triggering setState during widget build
+    Future.microtask(() async {
+      token = (await secureStorage.read(key: "authentication_key"))!;
+      Provider.of<StudentProfileProvider>(context, listen: false).fetchStudentData(childId);
+      print("Token: $token");
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    childId = ModalRoute.of(context)!.settings.arguments as String;
     provider = Provider.of(context);
     return Scaffold(
       body: Column(
