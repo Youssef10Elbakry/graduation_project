@@ -16,7 +16,7 @@ class UserProfileProvider with ChangeNotifier {
       final response = await http.get(
         Uri.parse('https://parentstarck.site/parent/profileData'),
         headers: {
-          'Authorization': 'Bearer $token', 
+          'Authorization': 'Bearer $token',
         },
       );
 
