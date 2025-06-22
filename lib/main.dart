@@ -9,7 +9,7 @@ import 'package:graduation_project/ui/providers/user_profile_provider.dart';
 import 'package:graduation_project/ui/providers/wallet_tab_provider.dart';
 import 'package:graduation_project/ui/providers/passcode_provider.dart';
 import 'package:graduation_project/ui/providers/comfirmation_provider.dart';
-
+import 'package:graduation_project/ui/screens/attendence_screen/attendance_screen.dart';
 import 'package:graduation_project/ui/screens/splash_screen.dart';
 import 'package:graduation_project/ui/screens/welcome_screen/welcome_screen.dart';
 import 'package:graduation_project/ui/screens/login_screen/login_screen.dart';
@@ -23,9 +23,9 @@ import 'package:graduation_project/ui/screens/passcode_screen/success_screen.dar
 import 'package:graduation_project/ui/screens/forgot_password_screens/forgot_password_screen.dart';
 import 'package:graduation_project/ui/screens/forgot_password_screens/successful_screen.dart';
 import 'package:graduation_project/ui/screens/transactions_details/transactions_details.dart';
-import 'package:graduation_project/ui/screens/attendence_screen/attendance_screen.dart';
 import 'package:graduation_project/ui/screens/grades_screen/grades_screen.dart';
 import 'package:graduation_project/ui/screens/main_screen/profile_tab/profile_tab.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
