@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 class WalletTabProvider extends ChangeNotifier{
   bool isLoadingChildren = true;
   bool isLoadingRecentTransactions = true;
-  Function(String message)? requestBottomSheet;
+  Function(String id, String username, String imageUrl)? requestBottomSheet;
   List<ChildModel> children = [];
   List<RecentTransaction> recentTransactions = [];
   String parentProfilePictureLink = "";
@@ -110,8 +110,12 @@ class WalletTabProvider extends ChangeNotifier{
     print("$error hhh");
     }
   }
-  void onChildTapped(String id){
+  void onChildTapped(String id, String username, String imageUrl){
+    if (requestBottomSheet != null) {
+      print("Child Id:   *** $id");
+      requestBottomSheet!(id, username, imageUrl);
 
+    }
   }
 
 

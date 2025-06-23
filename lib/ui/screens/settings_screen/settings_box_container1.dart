@@ -9,7 +9,7 @@ class SettingsBoxContainer1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Container(
       width: 400,
-      height: 145,
+      height: 80,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 23),
       decoration: BoxDecoration(
         color: Colors.white, // White background inside
@@ -27,8 +27,6 @@ class SettingsBoxContainer1 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SettingsRow(iconPath: "assets/images/passcode_icon.png", text: "Change passcode"),
-          Spacer(),
-          SettingsRow(iconPath: "assets/images/settings_biometric_icon.svg", text: "Biometric Authentication"),
         ],
       ),
 

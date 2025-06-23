@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graduation_project/ui/providers/student_profile_tab_bar_provider.dart';
 import 'package:graduation_project/ui/screens/student_profile_screen/attendance_tab_bar_view.dart';
+import 'package:graduation_project/ui/screens/student_profile_screen/grades_tab_bar_view.dart';
+import 'package:graduation_project/ui/screens/student_profile_screen/insights_tab_bar_view.dart';
 import 'package:graduation_project/ui/screens/student_profile_screen/student_profile_appbar.dart';
 import 'package:graduation_project/ui/screens/student_profile_screen/student_profile_balance_container.dart';
 import 'package:graduation_project/ui/screens/student_profile_screen/student_profile_textfield.dart';
@@ -21,9 +23,11 @@ class StudentProfileScreen extends StatefulWidget {
 
 class _StudentProfileScreenState extends State<StudentProfileScreen> {
   late StudentProfileTabBarProvider provider;
+  late StudentProfileProvider screenProvider;
   late String token;
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   late String childId;
+
 
 
   @override
@@ -42,34 +46,47 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
   @override
   Widget build(BuildContext context) {
     childId = ModalRoute.of(context)!.settings.arguments as String;
+    print("The child id in student profile screen $childId");
     provider = Provider.of(context);
+    screenProvider = Provider.of<StudentProfileProvider>(context);
+    final studentProfileModel = screenProvider.studentProfileModel;
     return Scaffold(
-      body: Column(
+      body: screenProvider.isLoading? const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+            ],
+          ),
+        ],
+      ):Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StudentProfileAppbar(name: "Deif Mohamed Ahmed",role: "Student",imageUrl: "ww"),
+          StudentProfileAppbar(name: studentProfileModel?.fullName,role: "Student",imageUrl: studentProfileModel?.profilePicture),
           SizedBox(height: 20,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 children: [
-                  StudentProfileTextfield(labelText: "Full Name", infoText: "Mahmoud Ayman",),
+                  StudentProfileTextfield(labelText: "Full Name", infoText: studentProfileModel?.fullName,),
                   SizedBox(height: 10,),
-                  StudentProfileTextfield(labelText: "Code", infoText: "211001811",),
+                  StudentProfileTextfield(labelText: "Code", infoText: studentProfileModel?.code,),
                 ],
               ),
               SizedBox(width: 20,),
-              StudentProfileBalanceContainer()
+              StudentProfileBalanceContainer(balance: studentProfileModel?.balance,)
             ],
           ),
           SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              StudentProfileTextfield(labelText: "Grade", infoText: "5th",),
+              StudentProfileTextfield(labelText: "Grade", infoText: studentProfileModel?.grade,),
               SizedBox(width: 20,),
-              StudentProfileTextfield(labelText: "Age", infoText: "10",),
+              StudentProfileTextfield(labelText: "Age", infoText: studentProfileModel?.age,),
 
             ],
           ),
@@ -106,8 +123,8 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                     ],
                   ),
                   SizedBox(height: 30,),
-                  Expanded(child: TabBarView(children: [AttendanceTabBarView(), Icon(Icons.add), Icon(Icons.exposure_minus_1)]))
-              
+                  Expanded(child: TabBarView(children: [AttendanceTabBarView(), GradesTabBarView(id: childId,), InsightsTabBarView()]))
+
                 ],
               ),
             ),

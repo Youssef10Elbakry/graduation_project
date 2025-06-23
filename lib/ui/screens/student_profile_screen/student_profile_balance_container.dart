@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StudentProfileBalanceContainer extends StatelessWidget {
-  const StudentProfileBalanceContainer({super.key});
+  StudentProfileBalanceContainer({super.key, required this.balance});
+  String? balance;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class StudentProfileBalanceContainer extends StatelessWidget {
         children: [
           Text("Balance", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16),),
           SizedBox(height: 7,),
-          Text("EGP 500", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 24),),
+          Text("EGP ${balance!}", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 24),),
         ],
       ),
     );

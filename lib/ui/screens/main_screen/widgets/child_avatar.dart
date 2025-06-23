@@ -27,6 +27,7 @@ class _ChildAvatarState extends State<ChildAvatar> {
   @override
   Widget build(BuildContext context) {
     homeTabProvider = Provider.of(context);
+    walletTabProvider = Provider.of(context);
     print(widget.childModel.id);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0),
@@ -36,7 +37,7 @@ class _ChildAvatarState extends State<ChildAvatar> {
             homeTabProvider.onChildTapped(widget.childModel.id);
           }
           else{
-            walletTabProvider.onChildTapped(widget.childModel.id);
+            walletTabProvider.onChildTapped(widget.childModel.id, widget.childModel.username, widget.childModel.profilePictureLink);
           }
 
         },

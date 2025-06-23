@@ -1,20 +1,30 @@
+import 'attendance_record.dart';
+
 class StudentProfileModel{
-  String fullName;
-  String code;
-  String grade;
-  String age;
+  String? fullName;
+  String? code;
+  String? grade;
+  String? age;
+  String? balance;
+  String? profilePicture;
+  List<AttendanceRecord>? attendanceRecords;
+  StudentProfileModel.fromJson(Map<String, dynamic> json) {
+    print(json);
+    fullName = "${json["student"]['firstName']} ${json["student"]['lastName']}" ?? '';
+    age = json["student"]['age'].toString() ?? '';
+    code = json["student"]["studentCode"]??'';
+    grade = json["student"]['grade'].toString() ?? '';
+    balance = json["student"]["balance"].toString()??'';
+    profilePicture = json["student"]['profilePicture'] ?? '';
+    if (json["student"]["attendances"] != null) {
+      attendanceRecords = [];
+      json["student"]["attendances"].forEach((v) {
+        attendanceRecords?.add(AttendanceRecord.fromJson(v));
+      });
+    }
 
-  // factory StudentProfileModel.fromJson(Map<String, dynamic> json) {
-  //   print(json);
-  //   return StudentProfileModel(
-  //     fullName: json["parent"]['username'] ?? '',
-  //     age: json["parent"]['age'].toString() ?? '',
-  //     numberOfChildren: json["parent"]['numberOfChildren'].toString() ?? '',
-  //     phoneNumber: json["parent"]['phoneNumber'] ?? '',
-  //     email: json["parent"]['email'] ?? '',
-  //     profilePhoto: json["parent"]['profilePhoto'] ?? '', // Parse the photo link
-  //   );
-  // }
+  }
 
-  StudentProfileModel({required this.fullName, required this.age, required this.code, required this.grade});
+  StudentProfileModel({required this.fullName, required this.age, required this.code, required this.grade, required this.profilePicture, required this.attendanceRecords});
 }
+

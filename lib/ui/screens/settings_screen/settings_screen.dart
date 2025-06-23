@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/ui/screens/settings_screen/logout_button.dart';
 import 'package:graduation_project/ui/screens/settings_screen/settings_box_container1.dart';
 import 'package:graduation_project/ui/screens/settings_screen/settings_box_container2.dart';
 
@@ -36,7 +37,9 @@ class SettingsScreen extends StatelessWidget {
             ],
           ),
           SizedBox(height: 20,),
-          SettingsBoxContainer2()
+          SettingsBoxContainer2(),
+          SizedBox(height: 200,),
+          LogoutButton()
 
         ],
       ),

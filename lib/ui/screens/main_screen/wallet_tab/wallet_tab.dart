@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graduation_project/models/recent_transaction_model.dart';
 import 'package:graduation_project/ui/providers/wallet_tab_provider.dart';
+import 'package:graduation_project/ui/screens/amount_screens/testing_screen.dart';
 import 'package:graduation_project/ui/screens/main_screen/wallet_tab/child_action_button.dart';
 import 'package:graduation_project/ui/screens/main_screen/wallet_tab/student_transaction_row.dart';
 import 'package:graduation_project/ui/screens/main_screen/wallet_tab/visa_container.dart';
@@ -20,11 +21,14 @@ class WalletTab extends StatefulWidget {
 
 class _WalletTabState extends State<WalletTab> {
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
-
+  late WalletTabProvider screenProvider;
   void initState() {
     super.initState();
 
     final provider = Provider.of<WalletTabProvider>(context, listen: false);
+    provider.requestBottomSheet = (String childId, String username, String imageUrl){
+      showAmountSheet(context, "0", childId, username, imageUrl);
+    };
     // provider.requestBottomSheet = (message){Navigator.pushNam};
     Future.microtask(() async {
       final String token = (await secureStorage.read(key: "authentication_key"))!;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:graduation_project/ui/providers/student_profile_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:graduation_project/ui/providers/home_tab_provider.dart';
@@ -40,6 +41,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => StudentProfileTabBarProvider()),
         ChangeNotifierProvider(create: (_) => PasscodeProvider()),
         ChangeNotifierProvider(create: (_) => ConfirmationProvider()),
+        ChangeNotifierProvider(create: (_)=> StudentProfileProvider())
       ],
       child: const MyApp(),
     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graduation_project/ui/screens/main_screen/profile_tab/profile_tab_textfield.dart';
+import 'package:graduation_project/ui/screens/settings_screen/settings_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
@@ -73,7 +74,7 @@ class _ProfileTabState extends State<ProfileTab> {
                             IconButton(
                               icon: const Icon(Icons.settings,
                                   color: Colors.white, size: 30),
-                              onPressed: () {},
+                              onPressed: () {Navigator.pushNamed(context, SettingsScreen.screenName);},
                             ),
                           ],
                         ),

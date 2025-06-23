@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class StudentProfileTextfield extends StatelessWidget {
   String labelText;
-  String infoText;
+  String? infoText;
 
   TextEditingController controller = TextEditingController();
   OutlineInputBorder border = OutlineInputBorder(
@@ -20,7 +20,7 @@ class StudentProfileTextfield extends StatelessWidget {
       height: 55,
       child: TextField(
         controller: controller,
-        readOnly: !(labelText == "Full Name"),
+        readOnly: true,
         style: TextStyle(color:labelText == "Full Name"? const Color(0xff212121):const Color(0xff757575)),
         decoration: InputDecoration(
           labelText: labelText,

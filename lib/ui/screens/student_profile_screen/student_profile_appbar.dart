@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../amount_screens/testing_screen.dart';
+import '../settings_screen/settings_screen.dart';
 
 class StudentProfileAppbar extends StatelessWidget{
-  String name;
+  String? name;
   String role;
-  String imageUrl;
+  String? imageUrl;
   StudentProfileAppbar({Key? key, required this.name, required this.imageUrl, required this.role});
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return ClipPath(
 
       clipper: CurveClipper(),
       child: Container(
-        height: 180, // Adjust height as needed
-        color: Color(0xff6156C8),
+        height: height*0.197, // Adjust height as needed
+        color: const Color(0xff6156C8),
         child:  Column(
             children: [
+              SizedBox(height: height*0.022,),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5.0),
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: width*0.012),
                 child: Row(
                   children: [
-                    IconButton(onPressed: (){Navigator.pop(context);},
-                        icon: Icon(Icons.arrow_back_ios_new, color: Colors.white,)),
+                    IconButton(onPressed: (){
+
+                      Navigator.pop(context);
+                      },
+                        icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white,)),
                     const Spacer(),
-                    IconButton(onPressed: (){},
-                        icon: Icon(Icons.settings, color: Colors.white,)),
+                    IconButton(onPressed: (){Navigator.pushNamed(context, SettingsScreen.screenName);},
+                        icon: const Icon(Icons.settings, color: Colors.white,)),
                   ],
                 ),
               ),
@@ -36,17 +44,33 @@ class StudentProfileAppbar extends StatelessWidget{
                   Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      CircleAvatar(radius: 37, child: Image.asset("assets/images/deif_circle_avatar.png"),),
-                      InkWell(
-                        onTap: (){},
-                          child: CircleAvatar(radius:16,child: SvgPicture.asset("assets/images/edit_pen_icon.svg"),))
+                      ClipOval(
+                        child: Image.network(
+                          imageUrl!,
+                          width: 74,
+                          height: 74,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/images/youssuf_mahmoud.png', // Your local placeholder image
+                              width: 74,
+                              height: 74,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        ),
+                      )
+
+                      // InkWell(
+                      //   onTap: (){},
+                      //     child: CircleAvatar(radius:16,child: SvgPicture.asset("assets/images/edit_pen_icon.svg"),))
                     ],
                   ),
                   SizedBox(width: 10,),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Deif Mohamed Ahmed", style: TextStyle(fontSize: 20,color: Colors.white, fontWeight: FontWeight.w500),),
+                      Text(name!, style: TextStyle(fontSize: 20,color: Colors.white, fontWeight: FontWeight.w500),),
                       Text("Student", style: TextStyle(fontSize: 12,color: Colors.white, fontWeight: FontWeight.w400))
                     ],
                   ),
