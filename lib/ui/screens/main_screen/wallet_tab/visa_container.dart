@@ -12,6 +12,8 @@ class VisaContainer extends StatefulWidget {
 class _VisaContainerState extends State<VisaContainer> {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Stack(
       alignment: Alignment.topLeft,
       children: [
@@ -19,14 +21,14 @@ class _VisaContainerState extends State<VisaContainer> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 65,),
+            SizedBox(height: height*0.071,),
             Padding(
-              padding: const EdgeInsets.only(left: 15),
+              padding:  EdgeInsets.only(left: width*0.0365),
               child: Text("Total Balance", style: TextStyle(fontFamily: "Montserrat",
                   fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white)),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15),
+              padding:  EdgeInsets.only(left: width*0.0365),
               child: Text("EGP ${widget.balance}", style: TextStyle(fontFamily: "Montserrat",
                   fontWeight: FontWeight.w800, fontSize: 40, color: Colors.white)),
             )

@@ -45,11 +45,14 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     childId = ModalRoute.of(context)!.settings.arguments as String;
     print("The child id in student profile screen $childId");
     provider = Provider.of(context);
     screenProvider = Provider.of<StudentProfileProvider>(context);
     final studentProfileModel = screenProvider.studentProfileModel;
+
     return Scaffold(
       body: screenProvider.isLoading? const Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -65,27 +68,27 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           StudentProfileAppbar(name: studentProfileModel?.fullName,role: "Student",imageUrl: studentProfileModel?.profilePicture),
-          SizedBox(height: 20,),
+          SizedBox(height: height*0.022),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 children: [
                   StudentProfileTextfield(labelText: "Full Name", infoText: studentProfileModel?.fullName,),
-                  SizedBox(height: 10,),
+                  SizedBox(height: height*0.01,),
                   StudentProfileTextfield(labelText: "Code", infoText: studentProfileModel?.code,),
                 ],
               ),
-              SizedBox(width: 20,),
+              SizedBox(width: width*0.0487,),
               StudentProfileBalanceContainer(balance: studentProfileModel?.balance,)
             ],
           ),
-          SizedBox(height: 10,),
+          SizedBox(height: height*0.0109,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               StudentProfileTextfield(labelText: "Grade", infoText: studentProfileModel?.grade,),
-              SizedBox(width: 20,),
+              SizedBox(width: width*0.0487,),
               StudentProfileTextfield(labelText: "Age", infoText: studentProfileModel?.age,),
 
             ],
@@ -95,14 +98,14 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
             child: Expanded(
               child: Column(
                 children: [
-                  SizedBox(height: 20,),
+                  SizedBox(height: height*0.0219,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
 
-                        width: 350,
-                        height: 40,
+                        width: width*0.8516,
+                        height: height*0.0438,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                             border: Border.all(color: const Color(0xffE7E7E7))
@@ -122,7 +125,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 30,),
+                  SizedBox(height: height*0.0328,),
                   Expanded(child: TabBarView(children: [AttendanceTabBarView(), GradesTabBarView(id: childId,), InsightsTabBarView()]))
 
                 ],

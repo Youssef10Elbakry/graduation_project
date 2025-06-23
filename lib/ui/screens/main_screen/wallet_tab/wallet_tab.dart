@@ -68,7 +68,7 @@ late WalletTabProvider provider;
         ),
         SizedBox(height: height*0.021,),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 17),
+          padding:  EdgeInsets.symmetric(vertical: 0, horizontal: width*0.04136),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

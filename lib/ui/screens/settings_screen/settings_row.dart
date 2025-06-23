@@ -19,6 +19,8 @@ class _SettingsRowState extends State<SettingsRow> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     if(widget.text == "Change passcode" ||
         widget.text == "Follow us on Facebook" || widget.text == "Follow us on Instagram"){
       useSvg = false;
@@ -31,7 +33,7 @@ class _SettingsRowState extends State<SettingsRow> {
       children: [
         useSvg?
         SvgPicture.asset(widget.iconPath): Image(image: AssetImage(widget.iconPath)),
-        SizedBox(width: 20,),
+        SizedBox(width: width*0.0487,),
         Text(widget.text, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
         Spacer(),
         widget.text == "Biometric Authentication"?

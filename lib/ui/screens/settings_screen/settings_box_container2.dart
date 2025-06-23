@@ -7,10 +7,12 @@ class SettingsBoxContainer2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Container(
-      width: 400,
-      height: 220,
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 23),
+      width: width*0.973,
+      height: height*0.24,
+      padding: EdgeInsets.symmetric(horizontal: width*0.0487, vertical: height*0.0252),
       decoration: BoxDecoration(
         color: Colors.white, // White background inside
         borderRadius: BorderRadius.circular(20), // Rounded corners

@@ -22,15 +22,20 @@ class _HomeInsightsContainerState extends State<HomeInsightsContainer> {
   late HomeTabProvider homeTabProvider;
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     homeTabProvider = Provider.of(context);
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, StudentProfileScreen.screenName, arguments: widget.id);
+        if(widget.title == "Attendance"){
+          Navigator.pushNamed(context, StudentProfileScreen.screenName, arguments: widget.id);
+        }
+
       },
       child: Container(
-        height: 103,
-        width: 376,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        height: height*0.1127,
+        width: width*0.915,
+        padding:  EdgeInsets.symmetric(horizontal: width*0.0365, vertical: height*0.0164),
         decoration: BoxDecoration(
           border: Border.all(color: const Color(0xffD2D5DA)),
           borderRadius: BorderRadius.circular(8)
@@ -46,31 +51,31 @@ class _HomeInsightsContainerState extends State<HomeInsightsContainer> {
             const Spacer(),
             widget.title == "Attendance"?
             SizedBox(
-              height: 100,
-              width: 100,
+              height: height*0.1094,
+              width: width*0.2433,
               child: PieChart(
                 PieChartData(
                   titleSunbeamLayout: false,
                   sectionsSpace: 2,
-                  centerSpaceRadius: 20,
+                  centerSpaceRadius: width*0.0487,
                   sections: [
                     PieChartSectionData(
                       showTitle: false,
                       value: homeTabProvider.presentPercentage,
                       color: Colors.blue,
-                      radius: 12,
+                      radius: width*0.0292,
                     ),
                     PieChartSectionData(
                       showTitle: false,
                       value: homeTabProvider.latePercentage,
                       color: Colors.purple,
-                      radius: 12,
+                      radius: width*0.0292,
                     ),
                     PieChartSectionData(
                       showTitle: false,
                       value: homeTabProvider.absentPercentage,
                       color: Colors.orange,
-                      radius: 12,
+                      radius: width*0.0292,
                     ),
                   ],
                 ),

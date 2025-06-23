@@ -26,11 +26,13 @@ class _ChildAvatarState extends State<ChildAvatar> {
   late WalletTabProvider walletTabProvider;
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     homeTabProvider = Provider.of(context);
     walletTabProvider = Provider.of(context);
     print(widget.childModel.id);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0),
+      padding:  EdgeInsets.symmetric(horizontal: width*0.0365, vertical: 0),
       child: InkWell(
         onTap: (){
           if(widget.inHomeTab){
@@ -46,7 +48,7 @@ class _ChildAvatarState extends State<ChildAvatar> {
             print("Error in loading image");
           },
           backgroundImage: NetworkImage(widget.childModel.profilePictureLink),
-          radius: 36,
+          radius: width*0.0876,
         ),
       ),
     );

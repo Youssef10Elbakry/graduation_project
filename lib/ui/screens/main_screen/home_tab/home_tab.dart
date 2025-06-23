@@ -42,7 +42,7 @@ class _HomeTabState extends State<HomeTab> {
     return Column(
       // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 20,),
+        SizedBox(height: screenHeight*0.022,),
         Row(
           children: [
             SizedBox(width: screenWidth*0.0446,),
@@ -63,7 +63,7 @@ class _HomeTabState extends State<HomeTab> {
             )
           ],
         ),
-        SizedBox(height: 40,),
+        SizedBox(height: screenHeight*0.0438,),
         Center(child: Image.asset("assets/images/football_courts.png")),
         SizedBox(height: screenHeight*0.02626,),
         Row(
@@ -100,9 +100,9 @@ class _HomeTabState extends State<HomeTab> {
             ),
           )),
 
-        SizedBox(height: 20),
+        SizedBox(height: screenHeight*0.022),
         SizedBox(
-          height: 300,
+          height: screenHeight*0.328,
           child: Visibility(
             visible: provider.insightsVisible,
             child: SingleChildScrollView(

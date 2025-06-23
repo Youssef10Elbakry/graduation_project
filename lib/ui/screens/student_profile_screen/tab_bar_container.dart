@@ -7,9 +7,11 @@ class TabBarContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Container(
-      width: 120,
-      height: 30,
+      width: width*0.29197,
+      height: height*0.033,
       alignment: Alignment.center,
       decoration: BoxDecoration(color: tabColor, borderRadius: BorderRadius.circular(8),),
       child: Text(tabText),

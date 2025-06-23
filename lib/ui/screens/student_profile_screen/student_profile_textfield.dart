@@ -14,10 +14,12 @@ class StudentProfileTextfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     TextEditingController controller = TextEditingController(text: infoText);
     return SizedBox(
-      width: labelText == "Age"?140:220,
-      height: 55,
+      width: labelText == "Age"?width*0.34:width*0.5353,
+      height: height*0.06,
       child: TextField(
         controller: controller,
         readOnly: true,

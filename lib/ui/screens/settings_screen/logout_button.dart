@@ -7,8 +7,10 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: 400, // You can adjust or remove this to control width
+      width: width*0.9732, // You can adjust or remove this to control width
       child: OutlinedButton.icon(
         onPressed: () {
           // Add your logout logic here
@@ -24,7 +26,7 @@ class LogoutButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           foregroundColor: const Color(0xff001645), // Text and icon color
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding:  EdgeInsets.symmetric(vertical: height*0.0175),
         ),
         icon: const Icon(Icons.logout, color: Color(0xff001645),),
         label: const Text('Logout',style: TextStyle(color: Color(0xff001645)),),

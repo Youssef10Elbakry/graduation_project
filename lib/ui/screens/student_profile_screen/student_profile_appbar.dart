@@ -37,7 +37,7 @@ class StudentProfileAppbar extends StatelessWidget{
                   ],
                 ),
               ),
-              SizedBox(height: 5,),
+              SizedBox(height: height*0.0055,),
               Row(
                 children: [
                   const Spacer(flex: 1,),
@@ -47,14 +47,14 @@ class StudentProfileAppbar extends StatelessWidget{
                       ClipOval(
                         child: Image.network(
                           imageUrl!,
-                          width: 74,
-                          height: 74,
+                          width: width*0.18,
+                          height: height*0.08,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
                             return Image.asset(
                               'assets/images/youssuf_mahmoud.png', // Your local placeholder image
-                              width: 74,
-                              height: 74,
+                              width: width*0.18,
+                              height: height*0.08,
                               fit: BoxFit.cover,
                             );
                           },
@@ -66,7 +66,7 @@ class StudentProfileAppbar extends StatelessWidget{
                       //     child: CircleAvatar(radius:16,child: SvgPicture.asset("assets/images/edit_pen_icon.svg"),))
                     ],
                   ),
-                  SizedBox(width: 10,),
+                  SizedBox(width: width*0.024,),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
