@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 Widget buildNumberPadSheet(
     BuildContext context,
     void Function(String) onAmountSelected,
-    String studentId,
+    String studentId, // ✅ Used to pass to Passcode screen
+    String imageUrl
     ) {
   String amount = "0";
   String? errorMessage;
@@ -26,19 +27,15 @@ Widget buildNumberPadSheet(
   void onSendPressed() {
     final double enteredAmount = double.tryParse(amount) ?? 0.0;
 
-    if (enteredAmount <= 3000) {
+
       Navigator.pushNamed(
         context,
         '/passcode',
         arguments: {
-          'studentId': studentId,
-          'amount': enteredAmount,
+          'studentId': studentId, // ✅ Passed to Passcode screen
+          'amount': enteredAmount, // ✅ Passed to Passcode screen
         },
       );
-    } else {
-      errorMessage = 'Insufficient Balance';
-      (context as Element).markNeedsBuild();
-    }
   }
 
   return Container(
@@ -52,11 +49,11 @@ Widget buildNumberPadSheet(
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
+             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  'Youssuf Mahmoud',
+              children: [
+                const Text(
+                  'Enter Amount',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22,
@@ -64,7 +61,7 @@ Widget buildNumberPadSheet(
                   ),
                 ),
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/youssuf_mahmoud.png'),
+                  backgroundImage: NetworkImage(imageUrl),
                   radius: 40,
                 ),
               ],

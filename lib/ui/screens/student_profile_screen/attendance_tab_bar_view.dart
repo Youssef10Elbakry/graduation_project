@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/ui/screens/attendence_screen/attendance_screen.dart';
 
 class AttendanceTabBarView extends StatefulWidget {
-  const AttendanceTabBarView({super.key});
+  String childId;
+  AttendanceTabBarView({super.key, required this.childId});
 
   @override
   State<AttendanceTabBarView> createState() => _AttendanceTabBarViewState();
@@ -25,7 +26,7 @@ class _AttendanceTabBarViewState extends State<AttendanceTabBarView> {
                 TextButton(
                   onPressed: () {
                     // TODO: Replace with actual student ID
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const AttendanceScreen(studentId: "68338d3b5918955bae6677a6")));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> AttendanceScreen(studentId:widget.childId)));
                   },
                   child: const Text("View All", style: TextStyle(color: Color(0xff3491DB), fontSize: 16, fontWeight: FontWeight.w500)),
                 )

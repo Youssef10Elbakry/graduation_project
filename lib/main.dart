@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
         GradesScreen.routeName: (_) => const GradesScreen(),
         ProfileTab.screenName: (_) => ProfileTab(),
       },
-      initialRoute: MainScreen.screenName,
+      initialRoute: SplashScreen.screenName,
     );
   }
 }

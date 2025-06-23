@@ -51,8 +51,8 @@ class StudentProfileAppbar extends StatelessWidget{
                           height: height*0.08,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
-                            return Image.asset(
-                              'assets/images/youssuf_mahmoud.png', // Your local placeholder image
+                            return SvgPicture.asset(
+                              'assets/images/no_image_found.svg', // Your local placeholder image
                               width: width*0.18,
                               height: height*0.08,
                               fit: BoxFit.cover,

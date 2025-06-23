@@ -15,7 +15,7 @@ class GradesTabBarView extends StatelessWidget {
       children: [
         GradeTabBarContainer(examName: "Midterm", examGrade: "20/30", subjectName: "English"),
         SizedBox(height: height*0.022,),
-        GradeTabBarContainer(examName: "Midterm", examGrade: "20/30", subjectName: "English"),
+        GradeTabBarContainer(examName: "Final", examGrade: "15/30", subjectName: "English"),
         SizedBox(height: height*0.022,),
         GradesButton(id: id)
 

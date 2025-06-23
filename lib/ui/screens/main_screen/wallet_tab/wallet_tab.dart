@@ -10,6 +10,7 @@ import 'package:graduation_project/ui/screens/main_screen/wallet_tab/visa_contai
 import 'package:graduation_project/ui/screens/transactions_details/transactions_details.dart';
 import 'package:provider/provider.dart';
 
+import '../../amount_screens/amount_selection_sheet.dart';
 import '../widgets/child_avatar.dart';
 
 class WalletTab extends StatefulWidget {

@@ -20,6 +20,8 @@ class PasscodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("In pass code screen, studentId: $studentId");
+    print("In pass code screen, amount: $amount");
     final passcodeProvider = Provider.of<PasscodeProvider>(context);
 
     return Scaffold(

@@ -7,7 +7,8 @@ Widget buildAmountSelectionSheet(
     String currentAmount,
     String studentName,
     String studentId,
-    ) {
+    String imageUrl
+    ){
   return Container(
     padding: const EdgeInsets.all(20),
     decoration: const BoxDecoration(
@@ -24,8 +25,8 @@ Widget buildAmountSelectionSheet(
               studentName,
               style: const TextStyle(color: Colors.white, fontSize: 22),
             ),
-            const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/youssuf_mahmoud.png'),
+            CircleAvatar(
+              backgroundImage: NetworkImage(imageUrl),
               radius: 35,
             ),
           ],
@@ -42,6 +43,8 @@ Widget buildAmountSelectionSheet(
                   context,
                       (selectedAmount) => onAmountChanged(selectedAmount),
                   studentId,
+                  imageUrl
+                  // ✅ Passed studentId for Passcode screen
                 );
               },
             );
@@ -57,7 +60,7 @@ Widget buildAmountSelectionSheet(
         ),
         const SizedBox(height: 20),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {}, // ✅ Optional: You can trigger the same behavior as NumberPad
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.lightBlueAccent,
             foregroundColor: Colors.white,
@@ -72,4 +75,38 @@ Widget buildAmountSelectionSheet(
         ),
       ],
     ),
-  );}
+  );
+}
+
+
+
+
+// ✅ Add this function at the bottom of amount_selection_sheet.dart
+
+void showAmountSheet(
+    BuildContext context,
+    String selectedAmount,
+    String studentId,
+    String studentName,
+    String imageUrl,
+    ) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    isScrollControlled: true,
+    builder: (context) {
+      return StatefulBuilder(
+        builder: (context, setState) {
+          return buildAmountSelectionSheet(
+            context,
+                (newAmount) => setState(() => selectedAmount = newAmount),
+            selectedAmount,
+            studentName,
+            studentId,
+            imageUrl
+          );
+        },
+      );
+    },
+  );
+}
