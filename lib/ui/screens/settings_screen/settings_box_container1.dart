@@ -28,7 +28,7 @@ class SettingsBoxContainer1 extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SettingsRow(iconPath: "assets/images/passcode_icon.png", text: "Change passcode"),
+          SettingsRow(iconPath: "assets/images/passcode_icon.png", text: "Change passcode", onClicked: (){Navigator.pushReplacementNamed(context, '/confirmation');}),
         ],
       ),
 

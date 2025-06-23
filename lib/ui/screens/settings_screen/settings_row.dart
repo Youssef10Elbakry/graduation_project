@@ -5,8 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 class SettingsRow extends StatefulWidget {
   String iconPath;
   String text;
+  Function onClicked;
 
-   SettingsRow({super.key, required this.iconPath, required this.text});
+   SettingsRow({super.key, required this.iconPath, required this.text, required this.onClicked});
 
   @override
   State<SettingsRow> createState() => _SettingsRowState();

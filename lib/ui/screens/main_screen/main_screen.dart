@@ -19,6 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: tabs[currIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currIndex,

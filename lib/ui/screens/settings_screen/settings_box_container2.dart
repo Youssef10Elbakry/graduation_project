@@ -28,11 +28,11 @@ class SettingsBoxContainer2 extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SettingsRow(iconPath: "assets/images/star_icon.svg", text: "Rate Us"),
+          SettingsRow(iconPath: "assets/images/star_icon.svg", text: "Rate Us", onClicked: (){},),
           Spacer(),
-          SettingsRow(iconPath: "assets/images/settings_facebook_icon.png", text: "Follow us on Facebook"),
+          SettingsRow(iconPath: "assets/images/settings_facebook_icon.png", text: "Follow us on Facebook",onClicked: (){}),
           Spacer(),
-          SettingsRow(iconPath: "assets/images/settings_instagram_icon.png", text: "Follow us on Instagram"),
+          SettingsRow(iconPath: "assets/images/settings_instagram_icon.png", text: "Follow us on Instagram", onClicked: (){}),
 
 
         ],
