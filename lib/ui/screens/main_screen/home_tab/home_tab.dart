@@ -119,6 +119,7 @@ class _HomeTabState extends State<HomeTab> {
                       ),),
                     ],
                   ),
+                  GradesButton(id: provider.childId),
                   SizedBox(height: screenHeight*0.03676,),
                   Center(child: HomeInsightsContainer(title: "Attendance", id: provider.childId, num: provider.attendancePercentage,
                   presentPercentage: provider.presentPercentage, absentPercentage: provider.absentPercentage,
@@ -126,7 +127,7 @@ class _HomeTabState extends State<HomeTab> {
                   SizedBox(height: screenHeight*0.015756,),
                   Center(child: HomeInsightsContainer(title: "Expediences", num: provider.expendiences,)),
                   SizedBox(height: screenHeight*0.015756,),
-                  GradesButton(id: provider.childId)
+
                 ],),
               ),
             ),

@@ -1,4 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+import 'package:graduation_project/ui/screens/grades_details_screen/grades_details_screen.dart';
 
 class GradesScreen extends StatefulWidget {
   static const String routeName = '/student-grades';
@@ -10,22 +14,62 @@ class GradesScreen extends StatefulWidget {
 }
 
 class _GradesScreenState extends State<GradesScreen> {
-  Future<Map<String, dynamic>> fetchStudentData() async {
-    await Future.delayed(const Duration(seconds: 2)); // Simulate API delay
+  late Future<Map<String, dynamic>> studentFuture;
+  late String studentId;
 
-    return {
-      "name": "Ethan Carter",
-      "grade": "10th Grade",
-      "gpa": 3.8,
-      "subjects": {
-        "Mathematics": 92,
-        "Science": 88,
-        "English": 75,
-        "History": 85,
-        "Physical Education": 95,
-        "Art": 70,
-      }
-    };
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    studentId = ModalRoute.of(context)!.settings.arguments as String;
+    studentFuture = fetchStudentData(studentId);
+  }
+
+  Future<Map<String, dynamic>> fetchStudentData(String id) async {
+    print("Fetching student data for ID: $id");
+
+    final token = await secureStorage.read(key: "authentication_key");
+    if (token == null) {
+      throw Exception("No token found in secure storage");
+    }
+
+    final url = Uri.parse('https://parentstarck.site/parent/student-grades/$id');
+    print("Calling API: $url");
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    print("Status Code: ${response.statusCode}");
+    print("Response Body: ${response.body}");
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+
+      final student = data['student'];
+      final gradesMap = data['gradesBySubject'] as Map<String, dynamic>;
+
+      Map<String, double> subjectsWithPercentages = {};
+      gradesMap.forEach((subject, gradesList) {
+        if (gradesList != null && gradesList.isNotEmpty) {
+          subjectsWithPercentages[subject] =
+              gradesList[0]['overallPercentage'].toDouble();
+        }
+      });
+
+      return {
+        "name": student['name'],
+        "grade": "${student['grade']}th Grade",
+        "subjects": subjectsWithPercentages,
+      };
+    } else {
+      throw Exception('Failed to load student grades');
+    }
   }
 
   @override
@@ -40,7 +84,7 @@ class _GradesScreenState extends State<GradesScreen> {
         leading: const BackButton(),
       ),
       body: FutureBuilder<Map<String, dynamic>>(
-        future: fetchStudentData(),
+        future: studentFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -51,7 +95,7 @@ class _GradesScreenState extends State<GradesScreen> {
           }
 
           final student = snapshot.data!;
-          final subjects = student["subjects"] as Map<String, int>;
+          final subjects = student["subjects"] as Map<String, double>;
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -59,51 +103,28 @@ class _GradesScreenState extends State<GradesScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Student Info
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Student Info",
-                              style: TextStyle(
-                                  color: Colors.grey.shade600,
-                                  fontWeight: FontWeight.w500)),
-                          const SizedBox(height: 4),
-                          Text(student["name"],
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18)),
-                          const SizedBox(height: 2),
-                          Text(
-                            "${student["grade"]} | GPA: ${student["gpa"]}",
-                            style: TextStyle(color: Colors.grey.shade600),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Student Image
-                    Container(
-                      height: 80,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/glasses_student.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
+                    Text("Student Info",
+                        style: TextStyle(
+                            color: Colors.grey.shade600,
+                            fontWeight: FontWeight.w500)),
+                    const SizedBox(height: 4),
+                    Text(student["name"],
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
+                    Text(student["grade"],
+                        style: TextStyle(
+                            color: Colors.grey.shade700, fontSize: 14)),
                   ],
                 ),
                 const SizedBox(height: 24),
-
-                // Subjects Header
                 const Text("Subjects",
-                    style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 16),
 
-                // Grid of subjects
+                // Subject Grid
                 Expanded(
                   child: GridView.builder(
                     itemCount: subjects.length,
@@ -117,58 +138,42 @@ class _GradesScreenState extends State<GradesScreen> {
                       final subject = subjects.keys.elementAt(index);
                       final grade = subjects[subject]!;
 
-                      return Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade300),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        padding: const EdgeInsets.all(12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                if (subject == "Mathematics") ...[
-                                  const Icon(Icons.calculate,
-                                      size: 18, color: Colors.black),
-                                  const SizedBox(width: 6),
-                                ],
-                                Flexible(
-                                  child: Text(
-                                    subject,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            Text(
-                              grade.toString(),
-                              style: const TextStyle(
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            GradesDetailsScreen.routeName,
+                            arguments: subject, // You can change this to ID later
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade300),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.all(12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                subject,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              const Spacer(),
+                              Text(
+                                "${grade.toStringAsFixed(1)}%",
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF615C8A)), // Custom purple
-                            ),
-                          ],
+                                  color: Color(0xFF615C8A),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
-                  ),
-
-                ),
-                Center(
-                  child: Container(
-                    height: 200,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/grades_picture.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
                   ),
                 ),
               ],

@@ -26,6 +26,7 @@ import 'package:graduation_project/ui/screens/forgot_password_screens/successful
 import 'package:graduation_project/ui/screens/transactions_details/transactions_details.dart';
 import 'package:graduation_project/ui/screens/grades_screen/grades_screen.dart';
 import 'package:graduation_project/ui/screens/main_screen/profile_tab/profile_tab.dart';
+import 'package:graduation_project/ui/screens/grades_details_screen/grades_details_screen.dart';
 
 
 void main() {
@@ -79,10 +80,12 @@ class MyApp extends StatelessWidget {
         ForgotPasswordScreen.routeName: (_) => const ForgotPasswordScreen(),
         SuccessfulScreen.routeName: (_) => const SuccessfulScreen(),
         TransactionsDetailsScreen.routeName: (_) => const TransactionsDetailsScreen(),
-        GradesScreen.routeName: (_) => const GradesScreen(),
+
+        GradesScreen.routeName: (context) => const GradesScreen(),
         ProfileTab.screenName: (_) => ProfileTab(),
+        GradesDetailsScreen.routeName: (context) => const GradesDetailsScreen(),
       },
-      initialRoute: MainScreen.screenName,
+      initialRoute: LoginScreen.screenName,
     );
   }
 }
