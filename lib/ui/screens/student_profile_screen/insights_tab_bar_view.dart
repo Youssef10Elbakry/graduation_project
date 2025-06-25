@@ -1,7 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/insights_tab_bar_view_provider.dart';
 
 class InsightsTabBarView extends StatefulWidget {
+
   const InsightsTabBarView({Key? key}) : super(key: key);
 
   @override
@@ -9,14 +13,32 @@ class InsightsTabBarView extends StatefulWidget {
 }
 
 class _InsightsTabBarViewState extends State<InsightsTabBarView> {
+
+
+  late InsightsTabBarViewProvider provider;
+
+
   String attendanceType = 'Attendance';
-  String timeFilter = 'Month';
+  String timeFilter = 'Semester';
 
   final List<String> attendanceOptions = ['Attendance'];
-  final List<String> timeOptions = ['Week', 'Month', 'Year'];
+  final List<String> timeOptions = ['Semester', 'Year'];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Delay API call to avoid triggering setState during widget build
+    Future.microtask(() async {
+      Provider.of<InsightsTabBarViewProvider>(context, listen: false).getAttendanceToShowDetails();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    provider = Provider.of(context);
+    print(provider.attendanceToShowColors);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Padding(
@@ -36,23 +58,24 @@ class _InsightsTabBarViewState extends State<InsightsTabBarView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Text("Attendance", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+                  // DropdownButton<String>(
+                  //   value: attendanceType,
+                  //   underline: const SizedBox(),
+                  //   items: attendanceOptions.map((String value) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: value,
+                  //       child: Text(value),
+                  //     );
+                  //   }).toList(),
+                  //   onChanged: (newValue) {
+                  //     setState(() {
+                  //       attendanceType = newValue!;
+                  //     });
+                  //   },
+                  // ),
                   DropdownButton<String>(
-                    value: attendanceType,
-                    underline: const SizedBox(),
-                    items: attendanceOptions.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        attendanceType = newValue!;
-                      });
-                    },
-                  ),
-                  DropdownButton<String>(
-                    value: timeFilter,
+                    value: provider.timeFilter,
                     underline: const SizedBox(),
                     items: timeOptions.map((String value) {
                       return DropdownMenuItem<String>(
@@ -62,7 +85,7 @@ class _InsightsTabBarViewState extends State<InsightsTabBarView> {
                     }).toList(),
                     onChanged: (newValue) {
                       setState(() {
-                        timeFilter = newValue!;
+                        provider.changeTimeFilter(newValue!);
                       });
                     },
                   ),
@@ -91,15 +114,7 @@ class _InsightsTabBarViewState extends State<InsightsTabBarView> {
                       topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
                     ),
                     gridData: FlGridData(show: false),
-                    barGroups: [
-                      _buildBar(0, 8, Colors.green),
-                      _buildBar(1, 10, Colors.green),
-                      _buildBar(2, 2, Colors.red),
-                      _buildBar(3, 6, Colors.orange),
-                      _buildBar(4, 7, Colors.orange),
-                      _buildBar(5, 10, Colors.green),
-                      _buildBar(6, 6, Colors.orange),
-                    ],
+                    barGroups: List.generate(7, (index)=>_buildBar(index, provider.attendanceToShow[index].toDouble(), provider.attendanceToShowColors[index])),
                   ),
                 ),
               ),

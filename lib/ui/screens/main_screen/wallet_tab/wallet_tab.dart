@@ -11,7 +11,7 @@ import 'package:graduation_project/ui/screens/transactions_details/transactions_
 import 'package:provider/provider.dart';
 
 import '../../amount_screens/amount_selection_sheet.dart';
-import '../widgets/child_avatar.dart';
+import '../../../widgets/child_avatar.dart';
 
 class WalletTab extends StatefulWidget {
   const WalletTab({super.key});
@@ -63,7 +63,7 @@ late WalletTabProvider provider;
         Row(
           children: [
             Spacer(),
-            VisaContainer(balance: 500,),
+            VisaContainer(balance: provider.parentBalance, username: provider.parentUsername,),
             Spacer()
           ],
         ),

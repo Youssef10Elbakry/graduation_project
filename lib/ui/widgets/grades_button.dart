@@ -19,7 +19,7 @@ class _GradesButtonState extends State<GradesButton> {
       onTap: (){Navigator.pushNamed(context, GradesScreen.routeName);},
       child: Container(
         decoration: BoxDecoration(
-            color: Color(0xff1F53B9),
+            color: const Color(0xff1F53B9),
           border: Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(8)
         ),
@@ -27,10 +27,10 @@ class _GradesButtonState extends State<GradesButton> {
         height: height*0.0656,
         child:  Row(
           children: [
-            Spacer(),
-            Text("Grades", style: TextStyle(fontSize: 20, color: Colors.white),),
-            Spacer(),
-            Icon(Icons.chevron_right, color: Colors.white,),
+            const Spacer(),
+            const Text("Grades", style: TextStyle(fontSize: 20, color: Colors.white),),
+            const Spacer(),
+            const Icon(Icons.chevron_right, color: Colors.white,),
             SizedBox(width: width*0.024,)
           ],
         ),

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graduation_project/ui/providers/home_tab_provider.dart';
-import 'package:graduation_project/ui/screens/main_screen/home_tab/grades_button.dart';
-import 'package:graduation_project/ui/screens/main_screen/widgets/child_avatar.dart';
+import 'package:graduation_project/ui/widgets/grades_button.dart';
+import 'package:graduation_project/ui/widgets/child_avatar.dart';
 import 'package:graduation_project/ui/screens/main_screen/home_tab/home_insights_container.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +69,7 @@ class _HomeTabState extends State<HomeTab> {
         Row(
           children: [
             SizedBox(width: screenWidth*0.089,),
-            Text("Children", style: TextStyle(
+            const Text("Children", style: TextStyle(
               color: Colors.black,
               fontFamily: "Poppins",
               fontWeight: FontWeight.w600,

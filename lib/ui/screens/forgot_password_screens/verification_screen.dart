@@ -198,20 +198,20 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   ),
                 ),
                 const SizedBox(width: 5),
-                GestureDetector(
-                  onTap: () {
-                    print("Resend email tapped");
-                  },
-                  child: Text(
-                    "Resend to email",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: const Color(0xFF1F41BB),
-                      decoration: TextDecoration.underline,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     print("Resend email tapped");
+                //   },
+                //   child: Text(
+                //     "Resend to email",
+                //     style: TextStyle(
+                //       fontSize: 16,
+                //       color: const Color(0xFF1F41BB),
+                //       decoration: TextDecoration.underline,
+                //       fontWeight: FontWeight.w500,
+                //     ),
+                //   ),
+                // ),
               ],
             )
 

@@ -15,12 +15,15 @@ class WalletTabProvider extends ChangeNotifier{
   List<RecentTransaction> recentTransactions = [];
   String parentProfilePictureLink = "";
   String parentUsername = "";
+  int parentBalance = 0;
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
+
 
   Future<void> getParentProfileData() async {
     try{
       final String token = (await secureStorage.read(key: "authentication_key"))!;
-    final url = Uri.parse('https://parentstarck.site/parent/dashboard');
+    final url = Uri.parse('https://parentstarck.site/parent/getWallet');
     final response = await http.get(
       url,
       headers: {
@@ -31,8 +34,10 @@ class WalletTabProvider extends ChangeNotifier{
       final data = json.decode(response.body);
       parentProfilePictureLink = data['parent']['profilePicture'];
       parentUsername = data['parent']['username'];
+      parentBalance = data['parent']['balance'];
       print("Parent Profile Picture Link: $parentProfilePictureLink");
       print("Parent Profile Username: $parentUsername");
+      print("Parent Profile Balance: $parentBalance");
       notifyListeners();
     } else {
       print("Error while loading parent profile picture link");
