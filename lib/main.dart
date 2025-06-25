@@ -4,6 +4,7 @@ import 'package:graduation_project/ui/providers/grades_provider.dart';
 import 'package:graduation_project/ui/providers/student_profile_provider.dart';
 import 'package:graduation_project/ui/screens/grades_details/grades_details_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:graduation_project/ui/providers/insights_tab_bar_view_provider.dart';
 
 import 'package:graduation_project/ui/providers/home_tab_provider.dart';
 import 'package:graduation_project/ui/providers/sign_in_button_provider.dart';
@@ -30,7 +31,6 @@ import 'package:graduation_project/ui/screens/grades_screen/grades_screen.dart';
 import 'package:graduation_project/ui/screens/main_screen/profile_tab/profile_tab.dart';
 
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
@@ -45,7 +45,10 @@ void main() {
         ChangeNotifierProvider(create: (_) => PasscodeProvider()),
         ChangeNotifierProvider(create: (_) => ConfirmationProvider()),
         ChangeNotifierProvider(create: (_)=> StudentProfileProvider()),
+        ChangeNotifierProvider(create: (_)=> InsightsTabBarViewProvider()),
         ChangeNotifierProvider(create: (_) => GradesProvider()),
+
+
       ],
       child: const MyApp(),
     ),
@@ -83,9 +86,7 @@ class MyApp extends StatelessWidget {
         ForgotPasswordScreen.routeName: (_) => const ForgotPasswordScreen(),
         SuccessfulScreen.routeName: (_) => const SuccessfulScreen(),
         TransactionsDetailsScreen.routeName: (_) => const TransactionsDetailsScreen(),
-
-        GradesScreen.routeName: (context) => const GradesScreen(),
-        ProfileTab.screenName: (_) => ProfileTab(),
+        GradesScreen.routeName: (_) => const GradesScreen(),
         GradesDetailsScreen.routeName: (context) {
           final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
           return GradesDetailsScreen(
@@ -93,8 +94,9 @@ class MyApp extends StatelessWidget {
             subjectName: args['subjectName'],
           );
         },
+        ProfileTab.screenName: (_) => ProfileTab(),
       },
-      initialRoute: LoginScreen.screenName,
+      initialRoute: MainScreen.screenName,
     );
   }
 }

@@ -24,7 +24,7 @@ class StudentProfileScreen extends StatefulWidget {
 class _StudentProfileScreenState extends State<StudentProfileScreen> {
   late StudentProfileTabBarProvider provider;
   late StudentProfileProvider screenProvider;
-  late String token;
+
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   late String childId;
 
@@ -36,9 +36,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
 
     // Delay API call to avoid triggering setState during widget build
     Future.microtask(() async {
-      token = (await secureStorage.read(key: "authentication_key"))!;
       Provider.of<StudentProfileProvider>(context, listen: false).fetchStudentData(childId);
-      print("Token: $token");
     });
   }
 

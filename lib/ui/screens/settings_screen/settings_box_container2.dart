@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/ui/screens/settings_screen/settings_row.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsBoxContainer2 extends StatelessWidget {
-  const SettingsBoxContainer2({super.key});
+  final Uri _url = Uri.parse('https://www.facebook.com/share/1JotaK7yd7/');
+   SettingsBoxContainer2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +23,18 @@ class SettingsBoxContainer2 extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 10,
-            offset: Offset(0, 5),
+            offset: const Offset(0, 5),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SettingsRow(iconPath: "assets/images/star_icon.svg", text: "Rate Us", onClicked: (){},),
-          Spacer(),
-          SettingsRow(iconPath: "assets/images/settings_facebook_icon.png", text: "Follow us on Facebook",onClicked: (){}),
-          Spacer(),
-          SettingsRow(iconPath: "assets/images/settings_instagram_icon.png", text: "Follow us on Instagram", onClicked: (){}),
+          SettingsRow(iconPath: "assets/images/star_icon.svg", text: "Rate Us", onClicked: () async {await launchUrl(_url);},),
+          const Spacer(),
+          SettingsRow(iconPath: "assets/images/settings_facebook_icon.png", text: "Follow us on Facebook",onClicked: () async {await launchUrl(_url);}),
+          const Spacer(),
+          SettingsRow(iconPath: "assets/images/settings_instagram_icon.png", text: "Follow us on Instagram", onClicked: () async {await launchUrl(_url);}),
 
 
         ],

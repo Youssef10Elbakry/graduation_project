@@ -26,13 +26,15 @@ class _GradeTabBarContainerState extends State<GradeTabBarContainer> {
       ),
       child: Row(
         children: [
-          Text(widget.examName, style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500, color: Color.fromRGBO(0, 0, 0, 0.75)),),
+          Text(widget.examName,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: height*0.027, fontWeight: FontWeight.w500, color: Color.fromRGBO(0, 0, 0, 0.75)),),
           Spacer(),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            Text(widget.examGrade, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 34, color: Color.fromRGBO(0, 0, 0, 0.75)),),
-            Text(widget.subjectName, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Color.fromRGBO(0, 0, 0, 0.50)),),
+            Text(widget.examGrade, style: TextStyle(fontWeight: FontWeight.w500, fontSize: height*0.0372, color: Color.fromRGBO(0, 0, 0, 0.75)),),
+            Text(widget.subjectName, style: TextStyle(fontWeight: FontWeight.w500, fontSize: height*0.022, color: Color.fromRGBO(0, 0, 0, 0.50)),),
           ],)
         ],
       ),

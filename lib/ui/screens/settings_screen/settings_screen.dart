@@ -18,30 +18,33 @@ class SettingsScreen extends StatelessWidget {
           SizedBox(height: height*0.033,),
           Row(
             children: [
-              SizedBox(width: width*0.0487,),
-              Text("Settings", style: TextStyle(fontFamily: "Montserrat", fontSize: 35, fontWeight: FontWeight.w700))
+              SizedBox(width: width*0.0287,),
+              IconButton(onPressed: (){Navigator.pop(context);},
+                  icon: const Icon(Icons.arrow_back_ios)),
+              SizedBox(width: width*0.0187,),
+              const Text("Settings", style: TextStyle(fontFamily: "Montserrat", fontSize: 35, fontWeight: FontWeight.w700))
             ],
           ),
-          SizedBox(height: height*0.022,),
+          SizedBox(height: height*0.038,),
           Row(
             children: [
               SizedBox(width: width*0.0487,),
-              Text("Security", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),),
+              const Text("Security", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),),
             ],
           ),
           SizedBox(height: height*0.022,),
-          SettingsBoxContainer1(),
+          const SettingsBoxContainer1(),
           SizedBox(height: height*0.0438,),
           Row(
             children: [
               SizedBox(width: width*0.0487,),
-              Text("About us", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),),
+              const Text("About us", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),),
             ],
           ),
           SizedBox(height: height*0.022,),
-          SettingsBoxContainer2(),
+           SettingsBoxContainer2(),
           SizedBox(height: height*0.22,),
-          LogoutButton()
+          const LogoutButton()
 
         ],
       ),
