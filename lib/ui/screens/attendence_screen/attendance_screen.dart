@@ -192,11 +192,19 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(90),
         child: AppBar(
-          leading: IconButton(
-            icon: SvgPicture.asset('assets/icons/back_icon.svg'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: IconButton(
+              icon: SvgPicture.asset(
+                'assets/images/back_icon.svg',
+                color: Colors.white,
+                width: 24,
+                height: 24,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
           ),
           title: Center(
             child: Padding(

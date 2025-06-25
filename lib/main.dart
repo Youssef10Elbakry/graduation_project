@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:graduation_project/ui/providers/grades_provider.dart';
 import 'package:graduation_project/ui/providers/student_profile_provider.dart';
+import 'package:graduation_project/ui/screens/grades_details/grades_details_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'package:graduation_project/ui/providers/home_tab_provider.dart';
@@ -26,7 +28,7 @@ import 'package:graduation_project/ui/screens/forgot_password_screens/successful
 import 'package:graduation_project/ui/screens/transactions_details/transactions_details.dart';
 import 'package:graduation_project/ui/screens/grades_screen/grades_screen.dart';
 import 'package:graduation_project/ui/screens/main_screen/profile_tab/profile_tab.dart';
-import 'package:graduation_project/ui/screens/grades_details_screen/grades_details_screen.dart';
+
 
 
 void main() {
@@ -42,7 +44,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => StudentProfileTabBarProvider()),
         ChangeNotifierProvider(create: (_) => PasscodeProvider()),
         ChangeNotifierProvider(create: (_) => ConfirmationProvider()),
-        ChangeNotifierProvider(create: (_)=> StudentProfileProvider())
+        ChangeNotifierProvider(create: (_)=> StudentProfileProvider()),
+        ChangeNotifierProvider(create: (_) => GradesProvider()),
       ],
       child: const MyApp(),
     ),
@@ -83,7 +86,13 @@ class MyApp extends StatelessWidget {
 
         GradesScreen.routeName: (context) => const GradesScreen(),
         ProfileTab.screenName: (_) => ProfileTab(),
-        GradesDetailsScreen.routeName: (context) => const GradesDetailsScreen(),
+        GradesDetailsScreen.routeName: (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          return GradesDetailsScreen(
+            studentId: args['studentId'],
+            subjectName: args['subjectName'],
+          );
+        },
       },
       initialRoute: LoginScreen.screenName,
     );

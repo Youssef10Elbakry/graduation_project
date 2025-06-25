@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:graduation_project/ui/screens/grades_details/grades_details_screen.dart';
 import 'package:http/http.dart' as http;
-import 'package:graduation_project/ui/screens/grades_details_screen/grades_details_screen.dart';
 
 class GradesScreen extends StatefulWidget {
   static const String routeName = '/student-grades';
@@ -143,7 +143,10 @@ class _GradesScreenState extends State<GradesScreen> {
                           Navigator.pushNamed(
                             context,
                             GradesDetailsScreen.routeName,
-                            arguments: subject, // You can change this to ID later
+                            arguments: {
+                              'studentId': studentId,
+                              'subjectName': subject,
+                            },
                           );
                         },
                         child: Container(
