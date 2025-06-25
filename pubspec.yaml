@@ -42,7 +42,7 @@ dependencies:
   flutter_launcher_icons: "^0.14.3"
   flutter_secure_storage: ^9.2.4
   syncfusion_flutter_charts: ^28.2.6
-  fl_chart: ^0.70.2
+  fl_chart: ^0.69.0
   intl: ^0.20.2
   google_fonts: ^6.2.1
   lottie: ^3.3.1
@@ -51,6 +51,13 @@ dependencies:
   url_launcher: ^6.3.1
   flutter_credit_card: ^4.1.0
   u_credit_card: ^1.4.0
+  shimmer: ^3.0.0
+
+
+  xml: ^6.1.0
+  shared_preferences: ^2.2.2
+  material_charts: ^0.0.27
+  axis_layout: ^1.0.1
 
 
 

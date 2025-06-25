@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:graduation_project/ui/providers/insights_tab_bar_view_provider.dart';
+import 'package:graduation_project/ui/providers/grades_provider.dart';
 import 'package:graduation_project/ui/providers/student_profile_provider.dart';
+import 'package:graduation_project/ui/screens/grades_details/grades_details_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:graduation_project/ui/providers/insights_tab_bar_view_provider.dart';
 
 import 'package:graduation_project/ui/providers/home_tab_provider.dart';
 import 'package:graduation_project/ui/providers/sign_in_button_provider.dart';
@@ -43,7 +45,10 @@ void main() {
         ChangeNotifierProvider(create: (_) => PasscodeProvider()),
         ChangeNotifierProvider(create: (_) => ConfirmationProvider()),
         ChangeNotifierProvider(create: (_)=> StudentProfileProvider()),
-        ChangeNotifierProvider(create: (_)=> InsightsTabBarViewProvider())
+        ChangeNotifierProvider(create: (_)=> InsightsTabBarViewProvider()),
+        ChangeNotifierProvider(create: (_) => GradesProvider()),
+
+
       ],
       child: const MyApp(),
     ),
@@ -82,6 +87,13 @@ class MyApp extends StatelessWidget {
         SuccessfulScreen.routeName: (_) => const SuccessfulScreen(),
         TransactionsDetailsScreen.routeName: (_) => const TransactionsDetailsScreen(),
         GradesScreen.routeName: (_) => const GradesScreen(),
+        GradesDetailsScreen.routeName: (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+          return GradesDetailsScreen(
+            studentId: args['studentId'],
+            subjectName: args['subjectName'],
+          );
+        },
         ProfileTab.screenName: (_) => ProfileTab(),
       },
       initialRoute: MainScreen.screenName,

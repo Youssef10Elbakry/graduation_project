@@ -126,7 +126,8 @@ class _HomeTabState extends State<HomeTab> {
                   SizedBox(height: screenHeight*0.015756,),
                   Center(child: HomeInsightsContainer(title: "Expediences", num: provider.expendiences,)),
                   SizedBox(height: screenHeight*0.015756,),
-                  GradesButton(id: provider.childId)
+                  GradesButton(id: provider.childId),
+
                 ],),
               ),
             ),

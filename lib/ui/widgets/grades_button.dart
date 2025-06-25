@@ -16,7 +16,7 @@ class _GradesButtonState extends State<GradesButton> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return InkWell(
-      onTap: (){Navigator.pushNamed(context, GradesScreen.routeName);},
+      onTap: (){Navigator.pushNamed(context, GradesScreen.routeName, arguments: widget.id);},
       child: Container(
         decoration: BoxDecoration(
             color: const Color(0xff1F53B9),

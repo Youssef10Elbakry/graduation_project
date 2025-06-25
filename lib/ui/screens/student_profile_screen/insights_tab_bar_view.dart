@@ -41,88 +41,104 @@ class _InsightsTabBarViewState extends State<InsightsTabBarView> {
     print(provider.attendanceToShowColors);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: EdgeInsets.all(width*0.0389),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(width*0.0389),
-          boxShadow: [
-            BoxShadow(color: Colors.black12, blurRadius: 6),
-          ],
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: width*0.0389, vertical: height*0.00875),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Attendance", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
-                  // DropdownButton<String>(
-                  //   value: attendanceType,
-                  //   underline: const SizedBox(),
-                  //   items: attendanceOptions.map((String value) {
-                  //     return DropdownMenuItem<String>(
-                  //       value: value,
-                  //       child: Text(value),
-                  //     );
-                  //   }).toList(),
-                  //   onChanged: (newValue) {
-                  //     setState(() {
-                  //       attendanceType = newValue!;
-                  //     });
-                  //   },
-                  // ),
-                  DropdownButton<String>(
-                    value: provider.timeFilter,
-                    underline: const SizedBox(),
-                    items: timeOptions.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        provider.changeTimeFilter(newValue!);
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding:  EdgeInsets.all(width*0.0389),
-                child: BarChart(
-                  BarChartData(
-                    alignment: BarChartAlignment.spaceAround,
-                    borderData: FlBorderData(show: false),
-                    titlesData: FlTitlesData(
-                      bottomTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          showTitles: true,
-                          getTitlesWidget: (value, meta) {
-                            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-                            return Text(days[value.toInt()]);
-                          },
-                        ),
-                      ),
-                      leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                      rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                      topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+    if(provider.attendanceToShow.isEmpty || provider.attendanceToShowColors.isEmpty){
+      return const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+            ],
+          ),
+        ],
+      );
+    }
+    else{
+      return Padding(
+        padding: EdgeInsets.all(width*0.0389),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(width*0.0389),
+            boxShadow: [
+              BoxShadow(color: Colors.black12, blurRadius: 6),
+            ],
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width*0.0389, vertical: height*0.00875),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Attendance", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+                    // DropdownButton<String>(
+                    //   value: attendanceType,
+                    //   underline: const SizedBox(),
+                    //   items: attendanceOptions.map((String value) {
+                    //     return DropdownMenuItem<String>(
+                    //       value: value,
+                    //       child: Text(value),
+                    //     );
+                    //   }).toList(),
+                    //   onChanged: (newValue) {
+                    //     setState(() {
+                    //       attendanceType = newValue!;
+                    //     });
+                    //   },
+                    // ),
+                    DropdownButton<String>(
+                      value: provider.timeFilter,
+                      underline: const SizedBox(),
+                      items: timeOptions.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          provider.changeTimeFilter(newValue!);
+                        });
+                      },
                     ),
-                    gridData: FlGridData(show: false),
-                    barGroups: List.generate(7, (index)=>_buildBar(index, provider.attendanceToShow[index].toDouble(), provider.attendanceToShowColors[index])),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding:  EdgeInsets.all(width*0.0389),
+                  child: BarChart(
+                    BarChartData(
+                      alignment: BarChartAlignment.spaceAround,
+                      borderData: FlBorderData(show: false),
+                      titlesData: FlTitlesData(
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            getTitlesWidget: (value, meta) {
+                              const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                              return Text(days[value.toInt()]);
+                            },
+                          ),
+                        ),
+                        leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                        rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                        topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                      ),
+                      gridData: FlGridData(show: false),
+                      barGroups: List.generate(7, (index)=>_buildBar(index, provider.attendanceToShow[index].toDouble(), provider.attendanceToShowColors[index])),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
+
   }
 
   BarChartGroupData _buildBar(int x, double y, Color color) {

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:graduation_project/ui/screens/main_screen/wallet_tab/wallet_tab.dart';
 
 class PaymentSuccessfulScreen extends StatefulWidget {
   static const routeName = '/payment_success';
 
-  const PaymentSuccessfulScreen({Key? key}) : super(key: key);
+  const PaymentSuccessfulScreen({super.key});
 
   @override
   _PaymentSuccessfulScreenState createState() => _PaymentSuccessfulScreenState();
@@ -83,57 +84,63 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen>
               const SizedBox(height: 40),
               FadeTransition(
                 opacity: _fadeAnimation,
-                child: Transform.translate(
-                  offset: Offset(0, _slideAnimation.value),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Payment Successful',
-                        style: GoogleFonts.inter(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w800,
-                          color: const Color(0xFF2E7D32),
-                          letterSpacing: -0.5,
+                child: AnimatedBuilder(
+                  animation: _slideAnimation,
+                  builder: (context, child) => Transform.translate(
+                    offset: Offset(0, _slideAnimation.value),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Payment Successful',
+                          style: GoogleFonts.inter(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w800,
+                            color: const Color(0xFF2E7D32),
+                            letterSpacing: -0.5,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Your transaction has been completed\nsuccessfully',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.inter(
-                          fontSize: 16,
-                          color: Colors.grey[600],
-                          height: 1.5,
+                        const SizedBox(height: 16),
+                        Text(
+                          'Your transaction has been completed\nsuccessfully',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter(
+                            fontSize: 16,
+                            color: Colors.grey[600],
+                            height: 1.5,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 40),
               FadeTransition(
                 opacity: _fadeAnimation,
-                child: Transform.translate(
-                  offset: Offset(0, _slideAnimation.value),
-                  child: ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF2E7D32),
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 16,
+                child: AnimatedBuilder(
+                  animation: _slideAnimation,
+                  builder: (context, child) => Transform.translate(
+                    offset: Offset(0, _slideAnimation.value),
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF2E7D32),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 16,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        elevation: 2,
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 2,
-                    ),
-                    child: Text(
-                      'Done',
-                      style: GoogleFonts.inter(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                      child: Text(
+                        'Done',
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
