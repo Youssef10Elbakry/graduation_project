@@ -9,8 +9,6 @@ class GradesTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    print(MediaQuery.of(context).size.height);
-    print(MediaQuery.of(context).size.width);
     return Column(
       children: [
         GradeTabBarContainer(examName: "Midterm Exam 2", examGrade: "98/100", subjectName: "Science"),

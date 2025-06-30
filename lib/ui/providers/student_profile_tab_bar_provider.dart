@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class StudentProfileTabBarProvider extends ChangeNotifier{
-  Color tab1Color = Color(0xff1849D6);
-  Color tab2Color = Color(0xffFFFFFF);
-  Color tab3Color = Color(0xffFFFFFF);
-  Color selectedTabColor = Color(0xff1849D6);
-  Color unselectedTabColor = Color(0xffFFFFFF);
+  Color tab1Color = const Color(0xff1849D6);
+  Color tab2Color = const Color(0xffFFFFFF);
+  Color tab3Color = const Color(0xffFFFFFF);
+  Color selectedTabColor = const Color(0xff1849D6);
+  Color unselectedTabColor = const Color(0xffFFFFFF);
 
   void resetColors(){
-     tab1Color = Color(0xff1849D6);
-     tab2Color = Color(0xffFFFFFF);
-     tab3Color = Color(0xffFFFFFF);
+     tab1Color = const Color(0xff1849D6);
+     tab2Color = const Color(0xffFFFFFF);
+     tab3Color = const Color(0xffFFFFFF);
   }
 
   void changeTabColor(int value){

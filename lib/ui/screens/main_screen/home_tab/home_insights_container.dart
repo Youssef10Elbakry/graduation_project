@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/ui/providers/home_tab_provider.dart';
+import 'package:graduation_project/ui/providers/insights_tab_bar_view_provider.dart';
 import 'package:graduation_project/ui/providers/student_profile_tab_bar_provider.dart';
 import 'package:graduation_project/ui/screens/student_profile_screen/student_profile_screen.dart';
 import 'package:provider/provider.dart';
@@ -22,17 +23,21 @@ class HomeInsightsContainer extends StatefulWidget {
 class _HomeInsightsContainerState extends State<HomeInsightsContainer> {
   late HomeTabProvider homeTabProvider;
   late StudentProfileTabBarProvider studentProfileTabBarProvider;
+  late InsightsTabBarViewProvider insightsTabBarViewProvider;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     homeTabProvider = Provider.of(context);
     studentProfileTabBarProvider = Provider.of(context);
+    insightsTabBarViewProvider = Provider.of(context);
     return InkWell(
       onTap: (){
         if(widget.title == "Attendance"){
           Navigator.pushNamed(context, StudentProfileScreen.screenName, arguments: widget.id).then((_){
             studentProfileTabBarProvider.resetColors();
+            insightsTabBarViewProvider.resetTimeFilter();
+
           });
         }
 

@@ -1,16 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/models/attendance_record.dart';
 import 'package:graduation_project/ui/screens/attendence_screen/attendance_screen.dart';
 
 class AttendanceTabBarView extends StatefulWidget {
   String childId;
-  AttendanceTabBarView({super.key, required this.childId});
+  List<AttendanceRecord>? records;
+  AttendanceTabBarView({super.key, required this.childId, required this.records});
 
   @override
   State<AttendanceTabBarView> createState() => _AttendanceTabBarViewState();
 }
 
 class _AttendanceTabBarViewState extends State<AttendanceTabBarView> {
+
+  Color getStatusColor(String status)=> status == 'present'? Colors.green: status == 'late'? Colors.orange: Colors.red;
+  String getDateOnly(dateTime)=> "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
+  String getTimeOnly(dateTime)=> "${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
+  
+  void initState(){
+    super.initState();
+    print("Unsorted Attendance Records: of ${widget.records?[0].id} in created at date: ${widget.records?[0].createdAt}");
+    widget.records?.sort((a, b) => b.date.compareTo(a.date));
+    print("Attendance Records: of ${widget.records?[0].id} in created at date: ${widget.records?[0].createdAt}");
+  }
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -47,15 +60,12 @@ class _AttendanceTabBarViewState extends State<AttendanceTabBarView> {
                 DataColumn(label: Text('Date', style: TextStyle(fontWeight: FontWeight.bold))),
                 DataColumn(label: Text('Login Time', style: TextStyle(fontWeight: FontWeight.bold))),
               ],
-              rows: [
-                _buildRow('PRESENT', '2024/09/30', '8:30', Colors.green),
-                _buildRow('PRESENT', '2023/09/29', '8:30', Colors.green),
-                _buildRow('LATE', '2023/09/28', '9:00', Colors.orange),
-                _buildRow('PRESENT', '2023/09/27', '8:30', Colors.green),
-                _buildRow('PRESENT', '2023/09/26', '8:30', Colors.green),
-                _buildRow('PRESENT', '2023/09/27', '8:30', Colors.green),
-                _buildRow('PRESENT', '2023/09/26', '8:30', Colors.green),
-              ],
+              rows: List.generate(7, (index)=>_buildRow(
+                  widget.records![index].status.toUpperCase(),
+                  getDateOnly(widget.records![index].createdAt),
+                  getTimeOnly(widget.records![index].createdAt),
+                  getStatusColor(widget.records![index].status)
+              )),
             ),
           ),
         ],

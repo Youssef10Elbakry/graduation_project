@@ -4,7 +4,7 @@ import 'package:graduation_project/ui/screens/settings_screen/settings_row.dart'
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsBoxContainer2 extends StatelessWidget {
-  final Uri _url = Uri.parse('https://www.facebook.com/share/1JotaK7yd7/');
+  final Uri url = Uri.parse('https://www.facebook.com/share/1JotaK7yd7/');
    SettingsBoxContainer2({super.key});
 
   @override
@@ -30,11 +30,11 @@ class SettingsBoxContainer2 extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SettingsRow(iconPath: "assets/images/star_icon.svg", text: "Rate Us", onClicked: () async {await launchUrl(_url);},),
+          SettingsRow(iconPath: "assets/images/star_icon.svg", text: "Rate Us", onClicked: () async {await launchUrl(url);},),
           const Spacer(),
-          SettingsRow(iconPath: "assets/images/settings_facebook_icon.png", text: "Follow us on Facebook",onClicked: () async {await launchUrl(_url);}),
+          SettingsRow(iconPath: "assets/images/settings_facebook_icon.png", text: "Follow us on Facebook",onClicked: () async {await launchUrl(url);}),
           const Spacer(),
-          SettingsRow(iconPath: "assets/images/settings_instagram_icon.png", text: "Follow us on Instagram", onClicked: () async {await launchUrl(_url);}),
+          SettingsRow(iconPath: "assets/images/settings_instagram_icon.png", text: "Follow us on Instagram", onClicked: () async {await launchUrl(url);}),
 
 
         ],

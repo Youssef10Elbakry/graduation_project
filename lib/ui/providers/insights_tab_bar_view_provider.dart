@@ -26,6 +26,10 @@ class InsightsTabBarViewProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  void resetTimeFilter(){
+    timeFilter = "Semester";
+  }
+
   void changeTimeFilter(String value){
     if(value == "Semester"){
       timeFilter = value;

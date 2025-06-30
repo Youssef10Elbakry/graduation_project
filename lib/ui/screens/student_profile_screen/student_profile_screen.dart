@@ -22,9 +22,9 @@ class StudentProfileScreen extends StatefulWidget {
 }
 
 class _StudentProfileScreenState extends State<StudentProfileScreen> {
+
   late StudentProfileTabBarProvider provider;
   late StudentProfileProvider screenProvider;
-
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   late String childId;
 
@@ -124,7 +124,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                     ],
                   ),
                   SizedBox(height: height*0.0328,),
-                  Expanded(child: TabBarView(children: [AttendanceTabBarView(childId: childId,), GradesTabBarView(id: childId,), InsightsTabBarView()]))
+                  Expanded(child: TabBarView(children: [AttendanceTabBarView(childId: childId, records: studentProfileModel!.attendanceRecords,), GradesTabBarView(id: childId,), InsightsTabBarView()]))
 
                 ],
               ),

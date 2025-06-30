@@ -28,7 +28,6 @@ class _InsightsTabBarViewState extends State<InsightsTabBarView> {
   void initState() {
     super.initState();
 
-    // Delay API call to avoid triggering setState during widget build
     Future.microtask(() async {
       Provider.of<InsightsTabBarViewProvider>(context, listen: false).getAttendanceToShowDetails();
     });
