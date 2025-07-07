@@ -21,15 +21,12 @@ class StudentProfileAppbar extends StatelessWidget{
         color: const Color(0xff6156C8),
         child:  Column(
             children: [
-              SizedBox(height: height*0.022,),
+              SizedBox(height: height*0.015,),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: width*0.012),
                 child: Row(
                   children: [
-                    IconButton(onPressed: (){
-
-                      Navigator.pop(context);
-                      },
+                    IconButton(onPressed: (){Navigator.pop(context);},
                         icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white,)),
                     const Spacer(),
                     IconButton(onPressed: (){Navigator.pushNamed(context, SettingsScreen.screenName);},
@@ -37,7 +34,6 @@ class StudentProfileAppbar extends StatelessWidget{
                   ],
                 ),
               ),
-              SizedBox(height: height*0.0055,),
               Row(
                 children: [
                   const Spacer(flex: 1,),
@@ -70,8 +66,8 @@ class StudentProfileAppbar extends StatelessWidget{
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(name!, style: TextStyle(fontSize: 20,color: Colors.white, fontWeight: FontWeight.w500),),
-                      Text("Student", style: TextStyle(fontSize: 12,color: Colors.white, fontWeight: FontWeight.w400))
+                      Text(name!, style: TextStyle(fontSize: width*0.04866,color: Colors.white, fontWeight: FontWeight.w500),),
+                      const Text("Student", style: TextStyle(fontSize: 12,color: Colors.white, fontWeight: FontWeight.w400))
                     ],
                   ),
                   const Spacer(flex: 2,)

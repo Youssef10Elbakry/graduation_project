@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graduation_project/ui/screens/login_screen/login_screen.dart';
 
 class LogoutButton extends StatelessWidget {
-  const LogoutButton({super.key});
+  FlutterSecureStorage storage = const FlutterSecureStorage();
+  LogoutButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +13,8 @@ class LogoutButton extends StatelessWidget {
     return SizedBox(
       width: width*0.9732, // You can adjust or remove this to control width
       child: OutlinedButton.icon(
-        onPressed: () {
-          // Add your logout logic here
+        onPressed: () async {
+          await storage.delete(key: "authentication_key");
           Navigator.pushNamedAndRemoveUntil(
             context,
             LoginScreen.screenName,

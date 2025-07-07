@@ -23,6 +23,7 @@ class WalletTab extends StatefulWidget {
 class _WalletTabState extends State<WalletTab> {
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   late WalletTabProvider screenProvider;
+  @override
   void initState() {
     super.initState();
 
@@ -36,7 +37,6 @@ class _WalletTabState extends State<WalletTab> {
       Provider.of<WalletTabProvider>(context, listen: false).getChildren();
       Provider.of<WalletTabProvider>(context, listen: false).getRecentTransactions();
       Provider.of<WalletTabProvider>(context, listen: false).getParentProfileData();
-      print("Token: $token");
     });
   }
 late WalletTabProvider provider;
@@ -45,100 +45,112 @@ late WalletTabProvider provider;
     provider = Provider.of(context);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Column(
-      children: [
-        Padding(
-          padding:  EdgeInsets.symmetric(vertical: height*0.021, horizontal: width*0.0446),
-          child: Row(
-            children: [
-              Text("Wallet", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35, fontFamily: "Montserrat"),),
-              Spacer(),
-              CircleAvatar(backgroundImage: NetworkImage(provider.parentProfilePictureLink),),
-
-            ],
-          ),
-
-        ),
-        SizedBox(height: height*0.04727),
-        Row(
+    return RefreshIndicator(
+      onRefresh: ()async{
+        Provider.of<WalletTabProvider>(context, listen: false).getChildren();
+        Provider.of<WalletTabProvider>(context, listen: false).getRecentTransactions();
+        Provider.of<WalletTabProvider>(context, listen: false).getParentProfileData();
+      },
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Column(
           children: [
-            Spacer(),
-            VisaContainer(balance: provider.parentBalance, username: provider.parentUsername,),
-            Spacer()
-          ],
-        ),
-        SizedBox(height: height*0.021,),
-        Padding(
-          padding:  EdgeInsets.symmetric(vertical: 0, horizontal: width*0.04136),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // SizedBox(width: width*0.089,),
-              const Text("Children", style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: "Poppins",
-                  fontWeight: FontWeight.w600,
-                  fontSize: 30
-              ),),
-              // Spacer(),
-              //
-              // Column(
-              //   children: [
-              //     ChildActionButton(text: "Transaction History"),
-              //     SizedBox(height: 10,),
-              //     ChildActionButton(text: "Send Money")
-              //   ],
-              // )
-            ],
-          ),
-        ),
-        SizedBox(height: height*0.02626,),
-        provider.isLoadingChildren?const Row(
-          children: [
-            Spacer(),
-            CircularProgressIndicator(),
-            Spacer()
-          ],
-        ):
-        SizedBox(
-            height: height*0.084,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: EdgeInsets.only(left: width*0.089),
-                child: Row(
-                  // mainAxisSize: MainAxisSize.max,
-                    children: List.generate(provider.children.length, (index) {
-                      return ChildAvatar(childModel: provider.children[index], inHomeTab: false,);
-                    })
-                ),
+            Padding(
+              padding:  EdgeInsets.symmetric(vertical: height*0.021, horizontal: width*0.0446),
+              child: Row(
+                children: [
+                  const Text("Wallet", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35, fontFamily: "Montserrat"),),
+                  const Spacer(),
+                  CircleAvatar(backgroundImage: NetworkImage(provider.parentProfilePictureLink),),
+
+                ],
               ),
-            )),
-        SizedBox(height: height*0.042,),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 0, horizontal: width*0.049),
-          child: Row(
-            children: [
-              const Text("Recent Transactions", style: TextStyle(fontFamily: 'Poppins',fontSize: 16, fontWeight: FontWeight.w600),),
-              const Spacer(),
-              InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>TransactionsDetailsScreen()));
-                },
-                  child: const Text("View All", style: TextStyle(color: Color(0xff3491DB), fontFamily: 'Poppins', fontSize: 16, fontWeight: FontWeight.w500),)),
+
+            ),
+            SizedBox(height: height*0.04727),
+            Row(
+              children: [
+                const Spacer(),
+                VisaContainer(balance: provider.parentBalance, username: provider.parentUsername,),
+                const Spacer()
+              ],
+            ),
+            SizedBox(height: height*0.021,),
+            Padding(
+              padding:  EdgeInsets.symmetric(vertical: 0, horizontal: width*0.04136),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // SizedBox(width: width*0.089,),
+                  Text("Children", style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w600,
+                      fontSize: 30
+                  ),),
+                  // Spacer(),
+                  //
+                  // Column(
+                  //   children: [
+                  //     ChildActionButton(text: "Transaction History"),
+                  //     SizedBox(height: 10,),
+                  //     ChildActionButton(text: "Send Money")
+                  //   ],
+                  // )
+                ],
+              ),
+            ),
+            SizedBox(height: height*0.02626,),
+            provider.isLoadingChildren?const Row(
+              children: [
+                Spacer(),
+                CircularProgressIndicator(),
+                Spacer()
+              ],
+            ):
+            SizedBox(
+                height: height*0.084,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: width*0.089),
+                    child: Row(
+                      // mainAxisSize: MainAxisSize.max,
+                        children: List.generate(provider.children.length, (index) {
+                          return ChildAvatar(childModel: provider.children[index], inHomeTab: false,);
+                        })
+                    ),
+                  ),
+                )),
+            SizedBox(height: height*0.042,),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 0, horizontal: width*0.049),
+              child: Row(
+                children: [
+                  const Text("Recent Transactions", style: TextStyle(fontFamily: 'Poppins',fontSize: 16, fontWeight: FontWeight.w600),),
+                  const Spacer(),
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>TransactionsDetailsScreen()));
+                    },
+                      child: const Text("View All", style: TextStyle(color: Color(0xff3491DB), fontFamily: 'Poppins', fontSize: 16, fontWeight: FontWeight.w500),)),
 
 
-            ],
-          ),
+                ],
+              ),
 
+            ),
+            SizedBox(height: height*0.0084,),
+            provider.isLoadingRecentTransactions?
+                const Row(children: [
+                  Spacer(), CircularProgressIndicator(), Spacer()
+                ],):
+            SizedBox(
+                height: height*0.2735,
+                child: ListView.builder( itemCount:provider.recentTransactions.length, itemBuilder: (_, index)=>StudentTransactionRow(recentTransaction: provider.recentTransactions[index])))
+          ],
         ),
-        SizedBox(height: height*0.0084,),
-        provider.isLoadingRecentTransactions?
-            const Row(children: [
-              Spacer(), CircularProgressIndicator(), Spacer()
-            ],):
-        Expanded(child: ListView.builder( itemCount:provider.recentTransactions.length, itemBuilder: (_, index)=>StudentTransactionRow(recentTransaction: provider.recentTransactions[index])))
-      ],
+      ),
     );
   }
 

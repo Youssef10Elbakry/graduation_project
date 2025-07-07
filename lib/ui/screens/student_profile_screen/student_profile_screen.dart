@@ -124,7 +124,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                     ],
                   ),
                   SizedBox(height: height*0.0328,),
-                  Expanded(child: TabBarView(children: [AttendanceTabBarView(childId: childId, records: studentProfileModel!.attendanceRecords,), GradesTabBarView(id: childId,), InsightsTabBarView()]))
+                  Expanded(child: TabBarView(children: [AttendanceTabBarView(childId: childId, records: studentProfileModel!.attendanceRecords,), GradesTabBarView(id: childId,), const InsightsTabBarView()]))
 
                 ],
               ),

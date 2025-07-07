@@ -12,10 +12,10 @@ class StudentTransactionRow extends StatefulWidget {
 }
 
 class _StudentTransactionRowState extends State<StudentTransactionRow> {
+
   @override
   Widget build(BuildContext context) {
     String formattedDate = DateFormat("MMM dd, h:mm a").format(widget.recentTransaction.date);
-    print(widget.recentTransaction.date);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Padding(

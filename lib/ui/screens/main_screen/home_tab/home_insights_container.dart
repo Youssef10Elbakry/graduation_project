@@ -53,9 +53,10 @@ class _HomeInsightsContainerState extends State<HomeInsightsContainer> {
         child: Row(
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
-                Text("${widget.num.toString()} ${widget.title == "Attendance"?"%":"EG"}", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),),
+                Text(widget.title, style: TextStyle(fontSize: height*0.0153, fontWeight: FontWeight.w500),),
+                Text("${widget.num.toString()} ${widget.title == "Attendance"?"%":"EG"}", style: TextStyle(fontSize: height*0.0328, fontWeight: FontWeight.w400),),
               ],
             ),
             const Spacer(),
@@ -91,7 +92,7 @@ class _HomeInsightsContainerState extends State<HomeInsightsContainer> {
                 ),
 
               ),
-            ):const Text(""),
+            ):const SizedBox.shrink(),
           ],
         ),
       ),

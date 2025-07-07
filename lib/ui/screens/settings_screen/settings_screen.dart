@@ -13,6 +13,7 @@ class SettingsScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Column(
         children: [
           SizedBox(height: height*0.033,),
@@ -44,7 +45,7 @@ class SettingsScreen extends StatelessWidget {
           SizedBox(height: height*0.022,),
            SettingsBoxContainer2(),
           SizedBox(height: height*0.22,),
-          const LogoutButton()
+          LogoutButton()
 
         ],
       ),

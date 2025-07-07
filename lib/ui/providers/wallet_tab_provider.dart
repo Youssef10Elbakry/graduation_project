@@ -18,8 +18,6 @@ class WalletTabProvider extends ChangeNotifier{
   int parentBalance = 0;
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
-
-
   Future<void> getParentProfileData() async {
     try{
       final String token = (await secureStorage.read(key: "authentication_key"))!;
@@ -102,9 +100,8 @@ class WalletTabProvider extends ChangeNotifier{
     final data = json.decode(response.body);
     for(int i = 0; i<data['parent']['transactionHistory'].length;i++){
     recentTransactions.add(RecentTransaction.fromJson(data['parent']['transactionHistory'][i]));
-    print(recentTransactions[i].amount);
     }
-    print("children: $recentTransactions");
+    recentTransactions.sort((a, b) => b.date.compareTo(a.date));
     isLoadingRecentTransactions = false;
     notifyListeners();
     } else {

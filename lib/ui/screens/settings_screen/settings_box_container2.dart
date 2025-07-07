@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SettingsBoxContainer2 extends StatelessWidget {
   final Uri url = Uri.parse('https://www.facebook.com/share/1JotaK7yd7/');
+  final Uri url1 = Uri.parse('https://www.instagram.com/youssufmahmoud?igsh=anFoanVlZ3g2OW52');
    SettingsBoxContainer2({super.key});
 
   @override
@@ -34,7 +35,7 @@ class SettingsBoxContainer2 extends StatelessWidget {
           const Spacer(),
           SettingsRow(iconPath: "assets/images/settings_facebook_icon.png", text: "Follow us on Facebook",onClicked: () async {await launchUrl(url);}),
           const Spacer(),
-          SettingsRow(iconPath: "assets/images/settings_instagram_icon.png", text: "Follow us on Instagram", onClicked: () async {await launchUrl(url);}),
+          SettingsRow(iconPath: "assets/images/settings_instagram_icon.png", text: "Follow us on Instagram", onClicked: () async {await launchUrl(url1);}),
 
 
         ],

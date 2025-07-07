@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:graduation_project/ui/providers/announcement_widget_provider.dart';
+import 'package:graduation_project/ui/providers/announcements_tab_provider.dart';
 import 'package:graduation_project/ui/providers/grades_provider.dart';
 import 'package:graduation_project/ui/providers/student_profile_provider.dart';
 import 'package:graduation_project/ui/screens/grades_details/grades_details_screen.dart';
@@ -41,6 +44,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => UserProfileProvider()),
         ChangeNotifierProvider(create: (_) => HomeTabProvider()),
         ChangeNotifierProvider(create: (_) => WalletTabProvider()),
+        ChangeNotifierProvider(create: (_) => AnnouncementsTabProvider()),
         ChangeNotifierProvider(create: (_) => StudentProfileTabBarProvider()),
         ChangeNotifierProvider(create: (_) => PasscodeProvider()),
         ChangeNotifierProvider(create: (_) => ConfirmationProvider()),
@@ -94,7 +98,7 @@ class MyApp extends StatelessWidget {
             subjectName: args['subjectName'],
           );
         },
-        ProfileTab.screenName: (_) => ProfileTab(),
+        ProfileTab.screenName: (_) => const ProfileTab(),
       },
       initialRoute: MainScreen.screenName,
     );
