@@ -25,7 +25,7 @@ class UserProfile {
       numberOfChildren: json["parent"]['numberOfChildren'].toString() ?? '',
       phoneNumber: json["parent"]['phoneNumber'] ?? '',
       email: json["parent"]['email'] ?? '',
-      profilePhoto: json["parent"]['profilePhoto'] ?? '', // Parse the photo link
+      profilePhoto: json["parent"]['profilePicture'] ?? '', // Parse the photo link
     );
   }
 }

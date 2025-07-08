@@ -32,16 +32,16 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    onBackgroundImageError: (_,d){
-                      print("Error in loading image");
-                    },
-                    backgroundImage: NetworkImage(""),
-                    radius: width*0.0681,
-                  ),
+                  // CircleAvatar(
+                  //   onBackgroundImageError: (_,d){
+                  //     print("Error in loading image");
+                  //   },
+                  //   backgroundImage: NetworkImage(""),
+                  //   radius: width*0.0681,
+                  // ),
                   SizedBox(width: width*0.02433,),
                   Expanded(
-                    flex: 5,
+                    flex: 6,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

@@ -52,9 +52,7 @@ class WalletTabProvider extends ChangeNotifier{
     notifyListeners();
     try{
       final String token = (await secureStorage.read(key: "authentication_key"))!;
-    print("Token in wallet Tab Provider: $token");
     final url = Uri.parse('https://parentstarck.site/parent/getWallet');
-    print("I am here parse");
     final response = await http.get(
     url,
     headers: {
@@ -68,7 +66,6 @@ class WalletTabProvider extends ChangeNotifier{
     print(data['parent']['childs'][i]['balance']);
     print(children[i].username);
     }
-    print("children: $children");
     isLoadingChildren = false;
     notifyListeners();
     } else {

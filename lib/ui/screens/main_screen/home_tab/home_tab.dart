@@ -107,7 +107,7 @@ class _HomeTabState extends State<HomeTab> {
 
             SizedBox(height: screenHeight*0.022),
             SizedBox(
-              height: 200,
+              height: screenHeight*0.287,
               child: Visibility(
                 visible: provider.insightsVisible,
                 child: SingleChildScrollView(

@@ -100,7 +100,7 @@ class MyApp extends StatelessWidget {
         },
         ProfileTab.screenName: (_) => const ProfileTab(),
       },
-      initialRoute: MainScreen.screenName,
+      initialRoute: SplashScreen.screenName,
     );
   }
 }
